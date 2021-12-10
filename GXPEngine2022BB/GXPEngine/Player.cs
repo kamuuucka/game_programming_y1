@@ -12,6 +12,7 @@ namespace GXPEngine
         private int screen_width;
         private int screen_height; 
         private float speed = 64f;
+        private bool hit;
         public Player(int screen_width, int screen_height) : base("forg.png")
         {
             this.screen_height = screen_height;
@@ -21,19 +22,17 @@ namespace GXPEngine
 
         public void CharacterMovement()
         {
-            bool isMoving = false; //Can be used to create idle and moving animation
 
             if (Input.GetKeyUp(Key.A))
             {
                 Move(-speed, 0);
                 Mirror(true, false);
-                isMoving = true;
+               
             }
             else if (Input.GetKeyUp(Key.D))
             {
                 Move(speed, 0);
                 Mirror(false, false);
-                isMoving = true;
             }
             else if (Input.GetKeyUp(Key.W))
             {
@@ -43,9 +42,11 @@ namespace GXPEngine
             {
                 Move(0, speed);
             }
-            else
+
+            if (hit)
             {
-                isMoving = false;
+                Console.WriteLine("Ran over by truck :(");
+                SpawnPlayer();
             }
 
         }
@@ -55,6 +56,11 @@ namespace GXPEngine
             SetXY(screen_width / 2 + 32, screen_height - 26);
             SetOrigin(width/2, height/2);
             Console.WriteLine(screen_width + " : " + screen_height);
+        }
+
+        public void getHit(bool isHit)
+        {
+            hit = isHit;
         }
     }
 }

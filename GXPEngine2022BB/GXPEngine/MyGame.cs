@@ -6,6 +6,7 @@ public class MyGame : Game
 {
     private Sprite background;
 	private Player player;
+	private Enemy enemy;
 
 	private float speed = 64f;
 	public MyGame() : base(768, 768, false)		// Create a window that's 800x600 and NOT fullscreen
@@ -15,9 +16,11 @@ public class MyGame : Game
 		background.SetXY(0, 0);
 
 		player = new Player(768,768);
+		enemy = new Enemy(player);
 
 		AddChild(background);
 		AddChild(player);
+		AddChild(enemy);
 	}
 
 	
@@ -26,6 +29,7 @@ public class MyGame : Game
 	void Update()
 	{
 		player.CharacterMovement();
+		enemy.EnemyMovement();
 	}
 
 	static void Main()							// Main() is the first method that's called when the program is run
