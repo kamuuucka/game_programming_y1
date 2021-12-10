@@ -8,18 +8,23 @@ namespace GXPEngine
 {
     internal class Enemy : Sprite
     {
-
+        private int eX;
+        private int eY;
         private float speed = 2f;
         private new Player player;
-        public Enemy(Player player) : base("truck.png")
+        public Enemy(Player player, int eX, int eY) : base("truck.png")
         {
-            SpawnEnemy();
             this.player = player;
+            this.eX = eX;
+            this.eY = eY;
+            SpawnEnemy();
         }
 
         private void SpawnEnemy()
         {
-            SetXY(770, 256 - height/2 - 2);
+            //eX = 770
+            //ey = 256
+            SetXY(eX, eY - height/2 - 2);
             SetOrigin(width / 2, height / 2);
         }
 
@@ -29,12 +34,17 @@ namespace GXPEngine
 
             if (x < 0 - width)
             {
-                x = 780;
+                x = eX;
+                Console.WriteLine("Respawning at " + eX);
             }
 
-            player.getHit(HitTest(player));
-            //Console.WriteLine();
+            RunOverPlayer();
             
+        }
+
+        private void RunOverPlayer()
+        {
+            player.getHit(HitTest(player));
         }
     }
 }

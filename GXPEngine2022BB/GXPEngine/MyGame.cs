@@ -6,9 +6,7 @@ public class MyGame : Game
 {
     private Sprite background;
 	private Player player;
-	private Enemy enemy;
-
-	private float speed = 64f;
+	private Enemy[] enemies = new Enemy[5];
 	public MyGame() : base(768, 768, false)		// Create a window that's 800x600 and NOT fullscreen
 	{
 
@@ -16,11 +14,20 @@ public class MyGame : Game
 		background.SetXY(0, 0);
 
 		player = new Player(768,768);
-		enemy = new Enemy(player);
+
+		for (int i = 0; i < enemies.Length; i++)
+        {
+			enemies[i] = new Enemy(player, 770 + (150 * i), 256);
+			Console.WriteLine("ENEMY " + i + ": " + (770 + (150 * i)) + ":" + 256);
+        }
 
 		AddChild(background);
 		AddChild(player);
-		AddChild(enemy);
+		for(int i = 0;i < enemies.Length; i++)
+        {
+			AddChild(enemies[i]);
+			Console.WriteLine(enemies[i] + " added");
+        }
 	}
 
 	
@@ -29,7 +36,10 @@ public class MyGame : Game
 	void Update()
 	{
 		player.CharacterMovement();
-		enemy.EnemyMovement();
+		for(int i = 0;i < enemies.Length; i++)
+        {
+			enemies[i].EnemyMovement();
+        }
 	}
 
 	static void Main()							// Main() is the first method that's called when the program is run
