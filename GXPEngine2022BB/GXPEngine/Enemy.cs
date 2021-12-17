@@ -44,7 +44,10 @@ namespace GXPEngine
 
         private void RunOverPlayer()
         {
-            player.getHit(HitTest(player));
+            if (HitTest(player))
+            {
+                player.getHit(true);
+            }
         }
     }
 }

@@ -13,10 +13,14 @@ namespace GXPEngine
         private int screen_height; 
         private float speed = 64f;
         private bool hit;
-        public Player(int screen_width, int screen_height) : base("forg.png")
+        //public Player(int screen_width, int screen_height) : base("forg.png")
+        //{
+        //    this.screen_height = screen_height;
+        //    this.screen_width = screen_width;
+        //    SpawnPlayer();
+        //}
+        public Player() : base("forg.png")
         {
-            this.screen_height = screen_height;
-            this.screen_width = screen_width;
             SpawnPlayer();
         }
 
@@ -27,7 +31,7 @@ namespace GXPEngine
             {
                 Move(-speed, 0);
                 Mirror(true, false);
-               
+                Console.Write("A key pressed");
             }
             else if (Input.GetKeyUp(Key.D))
             {
@@ -47,20 +51,25 @@ namespace GXPEngine
             {
                 Console.WriteLine("Ran over by truck :(");
                 SpawnPlayer();
+                hit = false;
             }
 
         }
 
         private void SpawnPlayer()
         {
-            SetXY(screen_width / 2 + 32, screen_height - 26);
             SetOrigin(width/2, height/2);
-            Console.WriteLine(screen_width + " : " + screen_height);
+            Console.WriteLine("Player spawned");
         }
 
         public void getHit(bool isHit)
         {
             hit = isHit;
+        }
+
+        void Update()
+        {
+            CharacterMovement();
         }
     }
 }
