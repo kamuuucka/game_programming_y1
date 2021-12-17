@@ -47,13 +47,30 @@ namespace GXPEngine
                 Move(0, speed);
             }
 
-            if (hit)
-            {
-                Console.WriteLine("Ran over by truck :(");
-                SpawnPlayer();
-                hit = false;
-            }
+            CheckCollisions();
 
+            //if (hit)
+            //{
+            //    Console.WriteLine("Ran over by truck :(");
+            //    SpawnPlayer();
+            //    hit = false;
+            //}
+        }
+
+        private void CheckCollisions()
+        {
+            GameObject[] collisions = GetCollisions();
+            for (int i = 0; i < collisions.Length; i++)
+            {
+                if (collisions[i] is Enemy)
+                {
+                    SpawnPlayer();
+                }
+                if (collisions[i] is Pickup)
+                {
+                    ((Pickup)collisions[i]).Grab();
+                }
+            }
         }
 
         private void SpawnPlayer()

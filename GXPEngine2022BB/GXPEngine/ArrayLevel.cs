@@ -10,6 +10,7 @@ namespace GXPEngine
     {
         const int TILE = 1;
         const int PLAYER = 2;
+        const int COIN = 3;
         //TODO: enemy, coin, moving platform, etc
 
         int[,,] levels =
@@ -20,7 +21,7 @@ namespace GXPEngine
                 {1,0,0,0,0,0,0,0,0,0,0,0 },
                 {1,0,0,0,0,0,0,0,0,0,0,0 },
                 {1,0,0,0,0,0,0,0,0,0,0,0 },
-                {1,0,0,0,0,0,0,0,0,0,0,0 },
+                {1,0,0,0,0,0,3,0,0,0,0,0 },
                 {1,0,0,0,0,0,0,0,0,0,0,0 },
                 {1,0,0,0,0,0,0,0,0,0,0,0 },
                 {1,0,0,0,0,0,0,0,0,0,0,0 },
@@ -70,6 +71,12 @@ namespace GXPEngine
                             player.x = col * tileSize + tileSize / 2;
                             player.y = row * tileSize + tileSize / 2;
                             AddChild(player);
+                            break;
+                        case COIN:
+                            Pickup pickup = new Pickup();
+                            pickup.x = col * tileSize / 2;
+                            pickup.y = row * tileSize / 2;
+                            AddChild(pickup);
                             break;
                     }
                 }

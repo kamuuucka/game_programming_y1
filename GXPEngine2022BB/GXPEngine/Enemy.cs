@@ -49,5 +49,10 @@ namespace GXPEngine
                 player.getHit(true);
             }
         }
+
+        void Update()
+        {
+            GameObject[] collisions = GetCollisions();
+        }
     }
 }

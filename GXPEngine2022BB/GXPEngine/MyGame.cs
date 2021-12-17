@@ -9,6 +9,7 @@ public class MyGame : Game
 	private Player player;
 	private Enemy[] enemies = new Enemy[5];
 	private LevelManager levelManager;
+	private Pickup pickup;
 
 	
 	public MyGame() : base(768, 768, false)		// Create a window that's 800x600 and NOT fullscreen
