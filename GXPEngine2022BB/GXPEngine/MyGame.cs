@@ -5,13 +5,17 @@ using System.Collections.Generic;
 
 public class MyGame : Game
 {
-    private Sprite background;
-	private Player player;
-	private Enemy[] enemies = new Enemy[5];
-	private LevelManager levelManager;
-	private Pickup pickup;
+ //   private Sprite background;
+	//private Player player;
+	//private Enemy[] enemies = new Enemy[5];
+	//private LevelManager levelManager;
+	//private Pickup pickup;
 
-	
+	//string startLevel = "map_demo1.tmx";
+	string startLevel = "map_scrolling.tmx";
+	string nextLevel = null;
+
+
 	public MyGame() : base(768, 768, false)		// Create a window that's 800x600 and NOT fullscreen
 	{
 
@@ -33,7 +37,8 @@ public class MyGame : Game
 		//	Console.WriteLine(enemies[i] + " added");
 		//      }
 
-		AddChild(new ArrayLevel(1));
+		//AddChild(new ArrayLevel(1));
+		LoadLevel(startLevel);
 		
 	}
 
@@ -43,10 +48,17 @@ public class MyGame : Game
 	// For every game object, Update is called every frame, by the engine:
 	void Update()
 	{
-		//for(int i = 0;i < enemies.Length; i++)
-  //      {
-		//	enemies[i].EnemyMovement();
-  //      }
+        //for(int i = 0;i < enemies.Length; i++)
+        //      {
+        //	enemies[i].EnemyMovement();
+        //      }
+
+        //Hot reload
+        if (Input.GetKeyDown(Key.R))
+        {
+			Console.WriteLine("RELOADING");
+			LoadLevel(startLevel);
+        }
 
 	}
 

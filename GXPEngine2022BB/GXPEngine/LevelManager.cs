@@ -15,15 +15,53 @@ namespace GXPEngine
 
         public LevelManager(string filename)
         {
-            Console.WriteLine("Creating new level object");
-            currentLevelName = filename;
+            Console.WriteLine("Creating new level " + filename);
+            currentLevelName = filename; //Basic respawning
+
             loader = new TiledLoader(filename);
 
             CreateLevel();
+            Console.WriteLine("LEVEL " + filename + " loaded.");
         }
+
         private void CreateLevel(bool includeImageLayers = true)
         {
-            Console.WriteLine("Spawning level objects");
+            Console.WriteLine("Spawning level elements");
+
+            loader.addColliders = false;
+            loader.rootObject = game;
+            loader.LoadImageLayers();
+
+            loader.rootObject = this; //child of level
+            loader.LoadTileLayers(0);
+            loader.LoadTileLayers(1);
+            loader.autoInstance = true;
+            loader.LoadObjectGroups();
+
+            player = FindObjectOfType<Player>();
+
+            //Setting camera on player
+            if (player.y + y > game.height - 128)
+            {
+                y = game.height - player.y - player.height - 20;
+            }
+        }
+
+        private void Scrolling()
+        {
+            int boundary = 704;            
+
+            if (player.y + y < boundary)
+            {
+                y = boundary - player.y;
+            }
+            
+        }
+
+        void Update()
+        {
+            if (player == null) return;
+            Scrolling();
         }
     }
 }

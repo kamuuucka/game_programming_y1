@@ -4,89 +4,85 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TiledMapParser;
+using GXPEngine;
 
-namespace GXPEngine
+
+internal class Player : Sprite
 {
-    internal class Player : Sprite
+    private float previousY = 0;
+    private float speed = 64f;
+    private bool hit;
+        
+    public Player(TiledObject obj=null) : base("forg.png")
     {
-        private int screen_width;
-        private int screen_height; 
-        private float speed = 64f;
-        private bool hit;
-        //public Player(int screen_width, int screen_height) : base("forg.png")
-        //{
-        //    this.screen_height = screen_height;
-        //    this.screen_width = screen_width;
-        //    SpawnPlayer();
-        //}
-        public Player() : base("forg.png")
+        SpawnPlayer();
+    }
+
+    private void CharacterMovement()
+    {
+
+        if (Input.GetKeyUp(Key.A))
         {
-            SpawnPlayer();
+            Move(-speed, 0);
+            Mirror(true, false);
+
+        }
+        else if (Input.GetKeyUp(Key.D))
+        {
+            Move(speed, 0);
+            Mirror(false, false);
+        }
+        else if (Input.GetKeyUp(Key.W))
+        {
+            Move(0, -speed);
+            previousY = y;
+        }
+        else if (Input.GetKeyUp(Key.S))
+        {
+            Move(0, speed);
         }
 
-        public void CharacterMovement()
+        CheckCollisions();
+
+            
+    }
+
+    private void CheckCollisions()
+    {
+        GameObject[] collisions = GetCollisions();
+        for (int i = 0; i < collisions.Length; i++)
         {
-
-            if (Input.GetKeyUp(Key.A))
+            if (collisions[i] is Enemy)
             {
-                Move(-speed, 0);
-                Mirror(true, false);
-                Console.Write("A key pressed");
+                SpawnPlayer();
             }
-            else if (Input.GetKeyUp(Key.D))
+            if (collisions[i] is Pickup)
             {
-                Move(speed, 0);
-                Mirror(false, false);
+                ((Pickup)collisions[i]).Grab();
+                Console.WriteLine("Coin stolen.");
             }
-            else if (Input.GetKeyUp(Key.W))
+            if (collisions[i] is Wall)
             {
-                Move(0, -speed);
+                y = previousY;
             }
-            else if (Input.GetKeyUp(Key.S))
-            {
-                Move(0, speed);
-            }
-
-            CheckCollisions();
-
-            //if (hit)
-            //{
-            //    Console.WriteLine("Ran over by truck :(");
-            //    SpawnPlayer();
-            //    hit = false;
-            //}
-        }
-
-        private void CheckCollisions()
-        {
-            GameObject[] collisions = GetCollisions();
-            for (int i = 0; i < collisions.Length; i++)
-            {
-                if (collisions[i] is Enemy)
-                {
-                    SpawnPlayer();
-                }
-                if (collisions[i] is Pickup)
-                {
-                    ((Pickup)collisions[i]).Grab();
-                }
-            }
-        }
-
-        private void SpawnPlayer()
-        {
-            SetOrigin(width/2, height/2);
-            Console.WriteLine("Player spawned");
-        }
-
-        public void getHit(bool isHit)
-        {
-            hit = isHit;
-        }
-
-        void Update()
-        {
-            CharacterMovement();
         }
     }
+
+    private void SpawnPlayer()
+    {
+        SetOrigin(width/2, height/2);
+        Console.WriteLine("Player spawned");
+    }
+
+    public void getHit(bool isHit)
+    {
+        hit = isHit;
+    }
+
+    void Update()
+    {
+        CharacterMovement();
+    }
 }
+
