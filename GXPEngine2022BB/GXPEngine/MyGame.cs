@@ -10,13 +10,12 @@ public class MyGame : Game
 	//private Enemy[] enemies = new Enemy[5];
 	//private LevelManager levelManager;
 	//private Pickup pickup;
-
 	//string startLevel = "map_demo1.tmx";
 	string startLevel = "map_scrolling.tmx";
 	string nextLevel = null;
 
 
-	public MyGame() : base(768, 768, false)		// Create a window that's 800x600 and NOT fullscreen
+	public MyGame() : base(768,768, false)		// Create a window that's 768x768 and NOT fullscreen
 	{
 
 		//background = new Sprite("background.png");

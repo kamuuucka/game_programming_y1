@@ -43,13 +43,13 @@ namespace GXPEngine
             //Setting camera on player
             if (player.y + y > game.height - 128)
             {
-                y = game.height - player.y - player.height - 20;
+                y = -512;
             }
         }
 
         private void Scrolling()
         {
-            int boundary = 704;            
+            int boundary = 716;            
 
             if (player.y + y < boundary)
             {
@@ -58,9 +58,21 @@ namespace GXPEngine
             
         }
 
+        public void setStartCamera()
+        {
+            if (player.y + y > game.height - 128)
+            {
+                y = -512;
+            }
+        }
+
         void Update()
         {
             if (player == null) return;
+            if (player.setDeath())
+            {
+                setStartCamera();
+            }
             Scrolling();
         }
     }

@@ -9,25 +9,32 @@ using TiledMapParser;
 
 internal class Wall : Sprite
 {
-    public Wall(TiledObject obj = null) : base("wall.png")
+    private Player player;
+    private float startX = 0;
+    private float startY = 0;
+    public Wall(TiledObject obj = null) : base("colors.png")
     {
-        this.width = 64;
-        this.height = 64;
-        SetOrigin(this.width / 2, this.height / 2);
         collider.isTrigger = true;
+        startX = obj.X;
+        startY = obj.Y;
         Console.WriteLine("Wall spawned");
     }
 
     private void FollowPlayer()
-    {
+    {    
         if (Input.GetKeyUp(Key.W))
         {
             Move(0, -64f);
-        }
+        }  
     }
 
     void Update()
     {
+        if (player.setDeath())
+        {
+            x = startX;
+            y = startY;
+        }
         FollowPlayer();
     }
 
