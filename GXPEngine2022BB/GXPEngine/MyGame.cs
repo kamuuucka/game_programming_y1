@@ -6,7 +6,9 @@ using System.Collections.Generic;
 public class MyGame : Game
 {
 	//string startLevel = "map_demo1.tmx";
-	string startLevel = "menu.tmx";
+	string startLevel = 
+		"map1.tmx";
+		//"menu.tmx";
 	string nextLevel = null;
 	EasyDraw healthUI;
 

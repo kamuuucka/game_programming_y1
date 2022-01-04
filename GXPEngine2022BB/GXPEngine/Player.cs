@@ -8,7 +8,7 @@ using TiledMapParser;
 using GXPEngine;
 
 
-internal class Player : Sprite
+internal class Player : AnimationSprite
 {
     private int damage = 1;
     const int maxHealth = 5;
@@ -22,7 +22,7 @@ internal class Player : Sprite
     public bool isDead = false;
     private LevelManager levelManager;
         
-    public Player(TiledObject obj=null) : base("forg.png")
+    public Player(TiledObject obj=null) : base("forg_sprites_big.png", 2, 2)
     {
         SpawnPlayer();
         health = maxHealth;
@@ -46,7 +46,8 @@ internal class Player : Sprite
         if (Input.GetKeyUp(Key.A))
         {
             Move(-speed, 0);
-            Mirror(true, false);
+            //Mirror(true, false);
+            SetCycle(1, 1);
             
             //Console.WriteLine("PX: " + previousX + "   X: " + this.x);
             previousX = x;
@@ -54,23 +55,27 @@ internal class Player : Sprite
         else if (Input.GetKeyUp(Key.D))
         {
             Move(speed, 0);
-            Mirror(false, false);
+            //Mirror(false, false);
+            SetCycle(0, 1);
             //Console.WriteLine("PX: " + previousX + "   X: " + this.x);
             previousX = x;
         }
         else if (Input.GetKeyUp(Key.W))
         {
             Move(0, -speed);
+            SetCycle(2, 1);
             //Console.WriteLine("PY: " + previousY + "   Y: " + this.y);
             previousY = y;
         }
         else if (Input.GetKeyUp(Key.S))
         {
             Move(0, speed);
+            SetCycle(3, 1); 
             //Console.WriteLine("PY: " + previousY + "   Y: " + this.y);
             previousY = y;
         }
 
+        Animate();
         CheckCollisions();
 
             
@@ -106,8 +111,9 @@ internal class Player : Sprite
     {
         x = startX;
         y = startY;
+        SetCycle(2, 1);
         //isDead = false;
-       // Console.WriteLine("Player spawned");
+        // Console.WriteLine("Player spawned");
     }
 
     private void BlockPlayer()
