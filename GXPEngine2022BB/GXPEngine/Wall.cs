@@ -8,8 +8,7 @@ using TiledMapParser;
 
 
 internal class Wall : Sprite
-{
-    private Player player;
+{ 
     private float startX = 0;
     private float startY = 0;
     public Wall(TiledObject obj = null) : base("colors.png")
@@ -25,16 +24,20 @@ internal class Wall : Sprite
         if (Input.GetKeyUp(Key.W))
         {
             Move(0, -64f);
+            Console.WriteLine(this.x);
         }  
+    }
+
+    public void WallRespawn()
+    {
+        this.x = startX;
+        this.y = startY;
     }
 
     void Update()
     {
-        if (player.setDeath())
-        {
-            x = startX;
-            y = startY;
-        }
+        //TODO: Respawning wall after player's death
+       
         FollowPlayer();
     }
 

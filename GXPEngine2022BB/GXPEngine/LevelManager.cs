@@ -4,76 +4,99 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiledMapParser;
+using GXPEngine;
 
-namespace GXPEngine
+
+internal class LevelManager : GameObject
 {
-    internal class LevelManager : GameObject
+    Player player;
+    TiledLoader loader;
+    string currentLevelName;
+
+    public LevelManager(string filename)
     {
-        Player player;
-        TiledLoader loader;
-        string currentLevelName;
+        //Console.WriteLine("Creating new level " + filename);
+        currentLevelName = filename; //Basic respawning
 
-        public LevelManager(string filename)
+        loader = new TiledLoader(filename);
+        loader.OnObjectCreated += ObjectCreateCallback;
+
+        CreateLevel();
+        //Console.WriteLine("LEVEL " + filename + " loaded.");
+    }
+
+    void ObjectCreateCallback(Sprite sprite, TiledObject obj)
+    {
+        if (sprite != null)
         {
-            Console.WriteLine("Creating new level " + filename);
-            currentLevelName = filename; //Basic respawning
-
-            loader = new TiledLoader(filename);
-
-            CreateLevel();
-            Console.WriteLine("LEVEL " + filename + " loaded.");
+            Console.WriteLine("Creating {0}", sprite.name);
         }
-
-        private void CreateLevel(bool includeImageLayers = true)
+        if (obj.Type == "Button")
         {
-            Console.WriteLine("Spawning level elements");
-
-            loader.addColliders = false;
-            loader.rootObject = game;
-            loader.LoadImageLayers();
-
-            loader.rootObject = this; //child of level
-            loader.LoadTileLayers(0);
-            loader.LoadTileLayers(1);
-            loader.autoInstance = true;
-            loader.LoadObjectGroups();
-
-            player = FindObjectOfType<Player>();
-
-            //Setting camera on player
-            if (player.y + y > game.height - 128)
-            {
-                y = -512;
-            }
-        }
-
-        private void Scrolling()
-        {
-            int boundary = 716;            
-
-            if (player.y + y < boundary)
-            {
-                y = boundary - player.y;
-            }
-            
-        }
-
-        public void setStartCamera()
-        {
-            if (player.y + y > game.height - 128)
-            {
-                y = -512;
-            }
-        }
-
-        void Update()
-        {
-            if (player == null) return;
-            if (player.setDeath())
-            {
-                setStartCamera();
-            }
-            Scrolling();
+            Console.WriteLine("Adding button");
+            AddChild(new Button(sprite,obj));   
         }
     }
+
+    private void CreateLevel(bool includeImageLayers = true)
+    {
+        //Console.WriteLine("Spawning level elements");
+
+        loader.addColliders = false;
+        loader.rootObject = game;
+        loader.LoadImageLayers();
+
+        loader.rootObject = this; //child of level
+        loader.LoadTileLayers(0);
+        loader.LoadTileLayers(1);
+        loader.autoInstance = true;
+        loader.LoadObjectGroups();
+
+        player = FindObjectOfType<Player>();
+
+        //Setting camera on player
+        if (player != null)
+        {
+            if (player.y + y > game.height - 128)
+            {
+                y = -576;
+            }
+        }
+        
+    }
+
+    private void Scrolling()
+    {
+        int boundary = 588;            
+
+        if (player.y + y < boundary)
+        {
+            y = boundary - player.y + 20;
+        }
+            
+    }
+
+
+    public void SetStartCamera()
+    {
+        if (player.y + y > game.height - 128)
+        {
+            y = -576;
+        }
+    }
+
+    void Update()
+    {
+        if (player == null) return;
+        if (player.isDead)
+        {
+            SetStartCamera();
+            
+            player.x = player.startX;               //resetting start positions to allow player move on few blocks without camre movement
+            player.y = player.startY;
+            player.isDead = false;
+        }
+        Scrolling();
+    }
 }
+

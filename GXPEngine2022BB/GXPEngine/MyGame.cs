@@ -5,52 +5,40 @@ using System.Collections.Generic;
 
 public class MyGame : Game
 {
- //   private Sprite background;
-	//private Player player;
-	//private Enemy[] enemies = new Enemy[5];
-	//private LevelManager levelManager;
-	//private Pickup pickup;
 	//string startLevel = "map_demo1.tmx";
-	string startLevel = "map_scrolling.tmx";
+	string startLevel = "menu.tmx";
 	string nextLevel = null;
+	EasyDraw healthUI;
 
 
-	public MyGame() : base(768,768, false)		// Create a window that's 768x768 and NOT fullscreen
+	public MyGame() : base(768,768, false, false, 768, 768,true)		// Create a window that's 768x768, NOT fullscreen, with pixel art enabled
 	{
 
-		//background = new Sprite("background.png");
-		//background.SetXY(0, 0);
-
-
-		//for (int i = 0; i < enemies.Length; i++)
-		//      {
-		//	enemies[i] = new Enemy(player, 770 + (150 * i), 256);
-		//	Console.WriteLine("ENEMY " + i + ": " + (770 + (150 * i)) + ":" + 256);
-		//      }
-
-		//AddChild(background);
-		//AddChild(player);
-		//for(int i = 0;i < enemies.Length; i++)
-		//      {
-		//	AddChild(enemies[i]);
-		//	Console.WriteLine(enemies[i] + " added");
-		//      }
-
-		//AddChild(new ArrayLevel(1));
 		LoadLevel(startLevel);
+	
 		
 	}
 
-	
-	
+	public void CreateUI()
+    {
+		healthUI = new EasyDraw(100, 20, false);
+
+		AddChild(healthUI);
+    }
+
+	public void ShowHealth(int health)
+    {
+		if (healthUI != null)
+        {
+			Console.WriteLine(" HEALTH: " + health);
+			healthUI.Text("Health: " + health, true);
+		}
+
+	}
 
 	// For every game object, Update is called every frame, by the engine:
 	void Update()
 	{
-        //for(int i = 0;i < enemies.Length; i++)
-        //      {
-        //	enemies[i].EnemyMovement();
-        //      }
 
         //Hot reload
         if (Input.GetKeyDown(Key.R))
@@ -71,13 +59,14 @@ public class MyGame : Game
 		List<GameObject> children = GetChildren();
 		foreach (GameObject child in children)
         {
-			child.Destroy();
+			child.LateDestroy();
         }
     }
 
 	public void LoadLevel(string filename)
     {
 		DestroyAll();
-		AddChild(new LevelManager(filename));
+		LateAddChild(new LevelManager(filename));
+		CreateUI();
     }
 }

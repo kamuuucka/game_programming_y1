@@ -10,17 +10,23 @@ using GXPEngine;
 
 internal class Player : Sprite
 {
+    private int damage = 1;
+    const int maxHealth = 5;
+    private int health;
     private float previousY = 0;
     private float previousX = 0;
-    private float startX = 0;
-    private float startY = 0;
+    public float startX = 0;
+    public float startY = 0;
     private float speed = 64f;
-    private bool hit;
+    private bool started;
+    public bool isDead = false;
     private LevelManager levelManager;
         
     public Player(TiledObject obj=null) : base("forg.png")
     {
         SpawnPlayer();
+        health = maxHealth;
+        ((MyGame)game).ShowHealth(health);
         if (obj != null)
         {
             startX = obj.X + 20;
@@ -33,6 +39,7 @@ internal class Player : Sprite
         
     }
 
+
     private void CharacterMovement()
     {
 
@@ -41,25 +48,27 @@ internal class Player : Sprite
             Move(-speed, 0);
             Mirror(true, false);
             
-            Console.WriteLine("PX: " + previousX + "   X: " + this.x);
+            //Console.WriteLine("PX: " + previousX + "   X: " + this.x);
             previousX = x;
         }
         else if (Input.GetKeyUp(Key.D))
         {
             Move(speed, 0);
             Mirror(false, false);
-            Console.WriteLine("PX: " + previousX + "   X: " + this.x);
+            //Console.WriteLine("PX: " + previousX + "   X: " + this.x);
             previousX = x;
         }
         else if (Input.GetKeyUp(Key.W))
         {
             Move(0, -speed);
-            Console.WriteLine("PY: " + previousY + "   Y: " + this.y);
+            //Console.WriteLine("PY: " + previousY + "   Y: " + this.y);
             previousY = y;
         }
         else if (Input.GetKeyUp(Key.S))
         {
             Move(0, speed);
+            //Console.WriteLine("PY: " + previousY + "   Y: " + this.y);
+            previousY = y;
         }
 
         CheckCollisions();
@@ -74,41 +83,52 @@ internal class Player : Sprite
         {
             if (collisions[i] is Enemy)
             {
+                TakeDamage();
+                isDead = true;
                 SpawnPlayer();
             }
             if (collisions[i] is Pickup)
             {
                 ((Pickup)collisions[i]).Grab();
-                Console.WriteLine("Coin stolen.");
+                //Console.WriteLine("Coin stolen.");
             }
             if (collisions[i] is Wall)
             {
-                y = previousY;
+                BlockPlayer();
+                Console.WriteLine("COLLISION");
                 //TODO: collision with walls on sides                
             }
         }
     }
 
+
     private void SpawnPlayer()
     {
-        setDeath();
         x = startX;
         y = startY;
-        Console.WriteLine("Player spawned");
+        //isDead = false;
+       // Console.WriteLine("Player spawned");
     }
 
-    public bool setDeath()
+    private void BlockPlayer()
     {
-        return true;
+        y = previousY;
+        x = previousX;
     }
 
-    public void getHit(bool isHit)
+    private void TakeDamage()
     {
-        hit = isHit;
+        health -= damage;
+        ((MyGame)game).ShowHealth(health);
     }
 
     void Update()
     {
+        if (!started)
+        {
+            ((MyGame)game).ShowHealth(health);
+            started = true;
+        }
         CharacterMovement();
     }
 }
