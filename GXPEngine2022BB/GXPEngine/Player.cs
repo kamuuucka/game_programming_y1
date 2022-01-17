@@ -94,8 +94,11 @@ internal class Player : AnimationSprite
             }
             if (collisions[i] is Wall)
             {
-                BlockPlayer();
-                Console.WriteLine("collision");              
+                BlockPlayer();          
+            }
+            if (collisions[i] is Log)
+            {
+                Move(((Log)collisions[i]).getSpeed(), 0);
             }
         }
     }
