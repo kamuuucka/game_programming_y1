@@ -27,6 +27,7 @@ internal class Enemy : Sprite
         else
         {
             startX = -128f;
+            Mirror(true,false);
         }
         
         Console.WriteLine("Enemy spawned");
