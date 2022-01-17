@@ -61,7 +61,6 @@ internal class Player : AnimationSprite
             previousY = y;
             Move(0, -speed);
             SetCycle(2, 1);
-            logAttached = false;
         }
         else if (Input.GetKeyUp(Key.S))
         {
@@ -76,7 +75,8 @@ internal class Player : AnimationSprite
         }
 
         Animate();
-        CheckCollisions();        
+        CheckCollisions();
+        logAttached = false;
     }
 
     private void CheckCollisions()
@@ -109,6 +109,10 @@ internal class Player : AnimationSprite
                 TakeDamage();
                 isDead = true;
                 SpawnPlayer();
+            }
+            if (collisions[i] is SaveSpot)
+            {
+                x = (int)(x / 64 + 1) * 64 - 32;
             }
         }
     }

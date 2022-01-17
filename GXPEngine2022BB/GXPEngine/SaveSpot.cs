@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 using GXPEngine;
 using TiledMapParser;
 
-
-internal class Death : Sprite
+internal class SaveSpot : Sprite
 {
-    public Death (TiledObject obj = null) : base("wall.png")
+    public SaveSpot(TiledObject obj = null) : base("wall.png")
     {
         collider.isTrigger = true;
-        Console.WriteLine("Water is deadly");
+        Console.WriteLine("SaveSpot");
     }
 }
-

@@ -107,6 +107,7 @@
     <Compile Include="GXPEngine\SoLoud\Soloud.cs" />
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
     <Compile Include="PlayerData.cs" />
+    <Compile Include="SaveSpot.cs" />
     <Compile Include="Wall.cs" />
     <Compile Include="Wall1.cs" />
   </ItemGroup>
