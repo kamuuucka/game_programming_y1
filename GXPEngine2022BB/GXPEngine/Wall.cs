@@ -54,6 +54,10 @@ internal class Wall : Sprite
         //TODO: Respawning wall after player's death
        
         FollowPlayer();
+        if (playerToFollow.isDead)
+        {
+            WallRespawn();
+        }
     }
 
     

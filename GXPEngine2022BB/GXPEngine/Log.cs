@@ -9,6 +9,7 @@ using TiledMapParser;
 
 internal class Log : Sprite
 {
+    //TODO: Log needs to drop player every 64 pixels
     private bool goesLeft;
     private float startX = 0f;
     private float speed = 2f;
@@ -27,7 +28,6 @@ internal class Log : Sprite
         else
         {
             startX = -128f;
-            //Mirror(true, false);
         }
 
         Console.WriteLine("Log spawned");

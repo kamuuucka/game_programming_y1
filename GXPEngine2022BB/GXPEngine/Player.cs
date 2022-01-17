@@ -19,6 +19,7 @@ internal class Player : AnimationSprite
     public float startY = 0;
     private float speed = 64f;
     private bool started;
+    private bool logAttached = false;
     public bool isDead = false;
     private LevelManager levelManager;
         
@@ -60,6 +61,7 @@ internal class Player : AnimationSprite
             previousY = y;
             Move(0, -speed);
             SetCycle(2, 1);
+            logAttached = false;
         }
         else if (Input.GetKeyUp(Key.S))
         {
@@ -94,11 +96,19 @@ internal class Player : AnimationSprite
             }
             if (collisions[i] is Wall)
             {
-                BlockPlayer();          
+                BlockPlayer();    
             }
             if (collisions[i] is Log)
             {
                 Move(((Log)collisions[i]).getSpeed(), 0);
+                Console.WriteLine("LOG");
+                logAttached = true;
+            }
+            if (collisions[i] is Death && !logAttached)
+            {
+                TakeDamage();
+                isDead = true;
+                SpawnPlayer();
             }
         }
     }
@@ -115,7 +125,6 @@ internal class Player : AnimationSprite
     private void BlockPlayer()
     {
         y = previousY;
-        x = previousX;
     }
 
     private void TakeDamage()

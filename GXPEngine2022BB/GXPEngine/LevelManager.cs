@@ -52,6 +52,8 @@ internal class LevelManager : GameObject
         loader.LoadTileLayers(0);
         loader.addColliders = true;
         loader.LoadTileLayers(1);
+        loader.LoadTileLayers(2);
+        loader.LoadTileLayers(3);
         loader.autoInstance = true;
         loader.LoadObjectGroups();
 
