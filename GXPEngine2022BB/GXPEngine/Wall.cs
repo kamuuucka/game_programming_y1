@@ -9,29 +9,44 @@ using TiledMapParser;
 
 internal class Wall : Sprite
 { 
-    private float startX = 0;
-    private float startY = 0;
-    public Wall(TiledObject obj = null) : base("colors.png")
+    private float previousY = 0;
+    private Player playerToFollow;
+    private float mapHeight = 0;
+    public Wall(Player player, float mapHeight) : base("colors.png")
     {
+        playerToFollow = player;
+        this.mapHeight = mapHeight;
+        WallRespawn();
         collider.isTrigger = true;
-        startX = obj.X;
-        startY = obj.Y;
-        Console.WriteLine("Wall spawned");
+        
+        
+        Console.WriteLine("Wall spawned: " + x + "," + y);
     }
 
     private void FollowPlayer()
-    {    
+    {
+        previousY = y;
+        if (Input.GetKeyUp(Key.S))
+        {
+            if (playerToFollow.y > previousY)
+            {
+                HitTest(playerToFollow);
+                Console.WriteLine("STOP");
+            }
+        }
         if (Input.GetKeyUp(Key.W))
         {
-            Move(0, -64f);
-            Console.WriteLine(this.x);
-        }  
+            if (y > playerToFollow.y + 116)
+            {
+                Move(0, -64f);
+            }
+            
+        }
     }
 
     public void WallRespawn()
     {
-        this.x = startX;
-        this.y = startY;
+        SetXY(0, mapHeight - 64);
     }
 
     void Update()

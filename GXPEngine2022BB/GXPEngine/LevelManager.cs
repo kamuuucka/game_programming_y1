@@ -12,6 +12,7 @@ internal class LevelManager : GameObject
     Player player;
     TiledLoader loader;
     string currentLevelName;
+    private float mapHeight = 0f;
 
     public LevelManager(string filename)
     {
@@ -20,8 +21,9 @@ internal class LevelManager : GameObject
 
         loader = new TiledLoader(filename);
         loader.OnObjectCreated += ObjectCreateCallback;
-
+        mapHeight = loader.map.Height;
         CreateLevel();
+
         //Console.WriteLine("LEVEL " + filename + " loaded.");
     }
 
@@ -48,6 +50,7 @@ internal class LevelManager : GameObject
 
         loader.rootObject = this; //child of level
         loader.LoadTileLayers(0);
+        loader.addColliders = true;
         loader.LoadTileLayers(1);
         loader.autoInstance = true;
         loader.LoadObjectGroups();
@@ -61,6 +64,7 @@ internal class LevelManager : GameObject
             {
                 y = -576;
             }
+            AddChild(new Wall(player, 64 * mapHeight));
         }
         
     }

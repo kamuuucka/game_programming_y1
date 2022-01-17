@@ -10,68 +10,52 @@ using TiledMapParser;
 internal class Enemy : Sprite
 {
     public float startX = 0;
-    private float startY;
     private float speed = 2f;
-    TiledObject obj;
-    List<Enemy> enemyList = new List<Enemy>(2);
-    //Enemy[] enemies = new Enemy[2];
+    private bool goesLeft = false;
     public Enemy(TiledObject obj = null) : base("truck.png")
     {
-        this.obj = obj;
-        //SpawnEnemy();
+        goesLeft = obj.GetBoolProperty("goesLeft", false);
         EnemiesSpawn();
-        startX = obj.X;
-        //startY = obj.Y;
     }
 
     private void EnemiesSpawn()
     {
-        for (int i = 0; i < 2; i++)
+        if (goesLeft)
         {
-            //Console.WriteLine("Enemies");
-            //enemyList.Add(new Enemy(obj));
-            //if (enemies[i] != null)
-            //{
-            //    enemies[i].x = (startX + i * 150f);
-            //}
-
+            startX = 777f;
         }
-        Console.WriteLine("Loop finished");
+        else
+        {
+            startX = -128f;
+        }
+        
+        Console.WriteLine("Enemy spawned");
     }
-
-    private void EnemiesMovement()
-    {
-        //for (int i = 0; i < enemies.Length; i++)
-        //{
-        //    enemies[i].EnemyMovement();
-        //}
-    }
-
-    private void SpawnEnemy()
-    {
-        Console.WriteLine("Enemy spawned");        
-    }
-
-    //public void SetSpawnX(float configuredX)
-    //{
-    //    startX = configuredX;
-    //}
 
     public void EnemyMovement()
     {
-        Move(-speed, 0);
-
-        if (x < 0 - width)
+        if (goesLeft)
         {
-            x = startX;
-            Console.WriteLine("Respawning at " + startX);
+            Move(-speed, 0);
+
+            if (x < 0 - width)
+            {
+                x = startX;
+            }
+        } else
+        {
+            Move(speed, 0);
+            if (x > 777 + width)
+            {
+                x = startX;
+            }
         }
+        
     }
 
     void Update()
     {
-        //EnemyMovement();
-        //EnemiesMovement();
+        EnemyMovement();
     }
 }
 

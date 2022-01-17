@@ -61,12 +61,12 @@ namespace GXPEngine
                     int tileType = levels[index, row, col];
                     switch (tileType)
                     {
-                        case TILE:
-                            Wall tile = new Wall();
-                            tile.x = col * tileSize;
-                            tile.y = row * tileSize;
-                            AddChild(tile);
-                            break;
+                        //case TILE:
+                        //    Wall tile = new Wall();
+                        //    tile.x = col * tileSize;
+                        //    tile.y = row * tileSize;
+                        //    AddChild(tile);
+                        //    break;
                         case PLAYER:
                             player = new Player();
                             player.x = col * tileSize + tileSize / 2;

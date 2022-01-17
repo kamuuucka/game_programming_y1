@@ -31,10 +31,10 @@ internal class Player : AnimationSprite
         {
             startX = obj.X + 20;
             previousX = startX;
-            Console.WriteLine(previousX);
             startY = obj.Y + 20;
             previousY = startY;
-            Console.WriteLine(previousY);
+            
+            Console.WriteLine("Player spawned: " + startX + ", " + startY);
         }
         
     }
@@ -45,40 +45,36 @@ internal class Player : AnimationSprite
 
         if (Input.GetKeyUp(Key.A))
         {
-            Move(-speed, 0);
-            //Mirror(true, false);
-            SetCycle(1, 1);
-            
-            //Console.WriteLine("PX: " + previousX + "   X: " + this.x);
             previousX = x;
+            Move(-speed, 0);
+            SetCycle(1, 1);
         }
         else if (Input.GetKeyUp(Key.D))
         {
-            Move(speed, 0);
-            //Mirror(false, false);
-            SetCycle(0, 1);
-            //Console.WriteLine("PX: " + previousX + "   X: " + this.x);
             previousX = x;
+            Move(speed, 0);
+            SetCycle(0, 1);
         }
         else if (Input.GetKeyUp(Key.W))
         {
+            previousY = y;
             Move(0, -speed);
             SetCycle(2, 1);
-            //Console.WriteLine("PY: " + previousY + "   Y: " + this.y);
-            previousY = y;
         }
         else if (Input.GetKeyUp(Key.S))
         {
-            Move(0, speed);
-            SetCycle(3, 1); 
-            //Console.WriteLine("PY: " + previousY + "   Y: " + this.y);
             previousY = y;
+            Move(0, speed);
+            SetCycle(3, 1);  
+        }
+
+        if (x<0 || x > 768)
+        {
+            x = previousX;
         }
 
         Animate();
-        CheckCollisions();
-
-            
+        CheckCollisions();        
     }
 
     private void CheckCollisions()
@@ -95,13 +91,11 @@ internal class Player : AnimationSprite
             if (collisions[i] is Pickup)
             {
                 ((Pickup)collisions[i]).Grab();
-                //Console.WriteLine("Coin stolen.");
             }
             if (collisions[i] is Wall)
             {
                 BlockPlayer();
-                Console.WriteLine("COLLISION");
-                //TODO: collision with walls on sides                
+                Console.WriteLine("collision");              
             }
         }
     }
@@ -112,9 +106,8 @@ internal class Player : AnimationSprite
         x = startX;
         y = startY;
         SetCycle(2, 1);
-        //isDead = false;
-        // Console.WriteLine("Player spawned");
     }
+
 
     private void BlockPlayer()
     {

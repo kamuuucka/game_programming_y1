@@ -511,6 +511,10 @@ namespace GXPEngine
 		/// The y coordinate to test.
 		/// </param>
 		virtual public bool HitTestPoint(float x, float y) {
+			if (_collider == null)
+            {
+
+            }
 			return _collider != null && _collider.HitTestPoint(x, y);
 		}		
 		
