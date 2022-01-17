@@ -112,6 +112,7 @@ internal class Player : AnimationSprite
             }
             if (collisions[i] is SaveSpot)
             {
+                //Calculating of frogs position, so it still moves every 64 pixels
                 x = (int)(x / 64 + 1) * 64 - 32;
             }
         }
