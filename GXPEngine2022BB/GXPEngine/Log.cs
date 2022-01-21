@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GXPEngine;
 using TiledMapParser;
+
+//Logs that can move player from left to right
 
 
 internal class Log : Sprite
 {
-    //TODO: Log needs to drop player every 64 pixels
     private bool goesLeft;
     private float startX = 0f;
     private float speed = 2f;
+    //TODO: Grapics for log!!!
     public Log(TiledObject obj = null) : base("checkers.png")
     {
         goesLeft = obj.GetBoolProperty("goesLeft", true);
         LogsSpawn();
     }
 
+    //Spawn logs on the screen. Depends on the boolean declaring if the log goes left or right
     private void LogsSpawn()
     {
         if (goesLeft)
@@ -29,10 +28,9 @@ internal class Log : Sprite
         {
             startX = -128f;
         }
-
-        Console.WriteLine("Log spawned");
     }
 
+    //Responsible for moving the logs
     private void LogMovement()
     {
         if (goesLeft)
@@ -52,9 +50,9 @@ internal class Log : Sprite
                 x = startX;
             }
         }
-
     }
 
+    //Getter used to put the log's speed into the player
     public float getSpeed()
     {
         if (goesLeft)

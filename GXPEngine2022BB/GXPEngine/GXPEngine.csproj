@@ -55,11 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayLevel.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Death.cs" />
     <Compile Include="Enemy.cs" />
-    <Compile Include="EnemyArray.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="Log.cs" />
@@ -109,7 +107,6 @@
     <Compile Include="PlayerData.cs" />
     <Compile Include="SaveSpot.cs" />
     <Compile Include="Wall.cs" />
-    <Compile Include="Wall1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

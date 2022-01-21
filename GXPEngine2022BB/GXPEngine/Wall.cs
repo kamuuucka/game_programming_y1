@@ -1,49 +1,39 @@
 ﻿using System;
 using GXPEngine;
-using TiledMapParser;
 
+//Wall that is following the player, so he can't go back too much and escape from the screen
 
 internal class Wall : Sprite
 { 
-    private float previousY = 0;
-    private Player playerToFollow;
     private float mapHeight = 0;
+    private Player playerToFollow;
+    
     public Wall(Player player, float mapHeight) : base("wall1.png")
     {
         playerToFollow = player;
         this.mapHeight = mapHeight;
         WallRespawn();
         collider.isTrigger = true;
-        
-        
-        Console.WriteLine("Wall spawned: " + x + "," + y);
     }
 
+    //Wall is following the player with each step
     private void FollowPlayer()
     {
-        previousY = y;
-        if (Input.GetKeyUp(Key.S))
-        {
-            if (playerToFollow.y > previousY)
-            {
-                HitTest(playerToFollow);
-                Console.WriteLine("STOP");
-            }
-        }
         if (Input.GetKeyUp(Key.W))
         {
-            //+ 116 if you want to make the wall higher and visible
-            if (y > playerToFollow.y + 180)
+            //If walls Y is higher than players Y + 180 it will move higher. Otherwise it will stay at the bottom of the scene.
+            //This stops the wall from going right after the player and allows him to move back on the screen.
+            if (y > playerToFollow.y + 180)  //+ 116 if you want to make the wall higher and visible
             {
                 Move(0, -64f);
             }
-            
         }
     }
 
+    //Makes sure, that wall respawns on the bottom of the screen
     public void WallRespawn()
     {
-        //SetXY(0, mapHeight - 64);
+        //SetXY(0, mapHeight - 64); //This allows to make the wall visible and one block higher
         SetXY(0, mapHeight);
     }
 

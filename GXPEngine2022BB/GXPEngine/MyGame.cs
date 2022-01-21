@@ -21,11 +21,12 @@ public class MyGame : Game
 		
 	}
 
-	public void CreateUI()
+	private void CreateUI()
     {
 		healthUI = new EasyDraw(100, 20, false);
+		healthUI.SetXY(0, height - 748);
 
-		AddChild(healthUI);
+		LateAddChild(healthUI);
     }
 
 	public void ShowHealth(int health)
