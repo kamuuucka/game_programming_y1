@@ -11,6 +11,7 @@ public class MyGame : Game
 		//"menu.tmx";
 	string nextLevel = null;
 	EasyDraw healthUI;
+	EasyDraw pointUI;
 
 
 	public MyGame() : base(768,768, false, false, 768, 768,true)		// Create a window that's 768x768, NOT fullscreen, with pixel art enabled
@@ -25,19 +26,30 @@ public class MyGame : Game
     {
 		healthUI = new EasyDraw(100, 20, false);
 		healthUI.SetXY(0, height - 748);
+		pointUI = new EasyDraw(100, 20, false);
+		pointUI.SetXY(width - 100, height - 748);
 
 		LateAddChild(healthUI);
+		LateAddChild(pointUI);
     }
 
 	public void ShowHealth(int health)
     {
 		if (healthUI != null)
         {
-			Console.WriteLine(" HEALTH: " + health);
+			//Console.WriteLine(" HEALTH: " + health);
 			healthUI.Text("Health: " + health, true);
 		}
 
 	}
+
+	public void ShowPoints(int points)
+    {
+		if(pointUI != null)
+        {
+			pointUI.Text("Points: " + points, true);
+        }
+    }
 
 	// For every game object, Update is called every frame, by the engine:
 	void Update()

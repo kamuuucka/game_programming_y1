@@ -6,8 +6,6 @@ using GXPEngine;
 internal class Player : AnimationSprite
 {
     private int damage = 1;
-    const int maxHealth = 5;
-    private int health;
     private float previousY = 0;
     private float previousX = 0;
     public float startX = 0;
@@ -16,13 +14,11 @@ internal class Player : AnimationSprite
     private bool started;
     private bool logAttached = false;
     public bool isDead = false;
-    private LevelManager levelManager;
+    PlayerData playerData = new PlayerData();
         
     public Player(TiledObject obj=null) : base("forg_sprites_big.png", 2, 2)
     {
         SpawnPlayer();
-        health = maxHealth;
-        ((MyGame)game).ShowHealth(health);
         if (obj != null)
         {
             startX = obj.X + 20;
@@ -88,6 +84,7 @@ internal class Player : AnimationSprite
             if (collisions[i] is Pickup)
             {
                 ((Pickup)collisions[i]).Grab();
+                playerData.Points++;
             }
             if (collisions[i] is Wall)
             {
@@ -129,18 +126,19 @@ internal class Player : AnimationSprite
 
     private void TakeDamage()
     {
-        health -= damage;
-        ((MyGame)game).ShowHealth(health);
+        playerData.Lives -= damage;
     }
 
     void Update()
     {
         if (!started)
         {
-            ((MyGame)game).ShowHealth(health);
+            
             started = true;
         }
         CharacterMovement();
+        ((MyGame)game).ShowHealth(playerData.Lives);
+        ((MyGame)game).ShowPoints(playerData.Points);
     }
 }
 
