@@ -15,7 +15,7 @@ internal class Log : Sprite
     private float speed = 2f;
     public Log(TiledObject obj = null) : base("checkers.png")
     {
-        goesLeft = obj.GetBoolProperty("goesLeft", false);
+        goesLeft = obj.GetBoolProperty("goesLeft", true);
         LogsSpawn();
     }
 

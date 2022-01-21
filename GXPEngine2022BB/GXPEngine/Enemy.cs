@@ -14,7 +14,7 @@ internal class Enemy : Sprite
     private bool goesLeft = false;
     public Enemy(TiledObject obj = null) : base("truck.png")
     {
-        goesLeft = obj.GetBoolProperty("goesLeft", false);
+        goesLeft = obj.GetBoolProperty("goesLeft", true);
         EnemiesSpawn();
     }
 

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GXPEngine;
 using TiledMapParser;
 
@@ -12,7 +8,7 @@ internal class Wall : Sprite
     private float previousY = 0;
     private Player playerToFollow;
     private float mapHeight = 0;
-    public Wall(Player player, float mapHeight) : base("colors.png")
+    public Wall(Player player, float mapHeight) : base("wall1.png")
     {
         playerToFollow = player;
         this.mapHeight = mapHeight;
@@ -36,7 +32,8 @@ internal class Wall : Sprite
         }
         if (Input.GetKeyUp(Key.W))
         {
-            if (y > playerToFollow.y + 116)
+            //+ 116 if you want to make the wall higher and visible
+            if (y > playerToFollow.y + 180)
             {
                 Move(0, -64f);
             }
@@ -46,13 +43,12 @@ internal class Wall : Sprite
 
     public void WallRespawn()
     {
-        SetXY(0, mapHeight - 64);
+        //SetXY(0, mapHeight - 64);
+        SetXY(0, mapHeight);
     }
 
     void Update()
-    {
-        //TODO: Respawning wall after player's death
-       
+    {       
         FollowPlayer();
         if (playerToFollow.isDead)
         {
