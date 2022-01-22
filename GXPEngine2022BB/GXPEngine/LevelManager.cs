@@ -11,15 +11,15 @@ internal class LevelManager : GameObject
 {
     Player player;
     TiledLoader loader;
-    string currentLevelName;
     private float mapHeight = 0f;
+    private bool isPlaying = false;
+    
 
     public LevelManager(string filename)
     {
         //Console.WriteLine("Creating new level " + filename);
-        currentLevelName = filename; //Basic respawning
-
         loader = new TiledLoader(filename);
+        
         loader.OnObjectCreated += ObjectCreateCallback;
         mapHeight = loader.map.Height;
         CreateLevel();
@@ -27,7 +27,9 @@ internal class LevelManager : GameObject
         //Console.WriteLine("LEVEL " + filename + " loaded.");
     }
 
-    void ObjectCreateCallback(Sprite sprite, TiledObject obj)
+    
+
+    private void ObjectCreateCallback(Sprite sprite, TiledObject obj)
     {
         if (sprite != null)
         {
@@ -43,7 +45,7 @@ internal class LevelManager : GameObject
     private void CreateLevel(bool includeImageLayers = true)
     {
         //Console.WriteLine("Spawning level elements");
-
+        
         loader.addColliders = false;
         loader.rootObject = game;
         loader.LoadImageLayers();
@@ -108,7 +110,7 @@ internal class LevelManager : GameObject
 
         if (player.IsDead())
         {
-            Console.WriteLine("END");
+            ((MyGame)game).StopMusic();
             ((MyGame)game).LoadLevel("end.tmx");
         }
     }

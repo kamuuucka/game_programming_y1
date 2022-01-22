@@ -36,6 +36,7 @@ internal class Button : GameObject
             visualButton.SetColor(1, 1, 1);
             if (Input.GetMouseButtonDown(0))
             {
+                ((MyGame)game).StopMusic();
                 if (!isFinished)
                 {
                     ((MyGame)game).LoadLevel(filename + ".tmx");

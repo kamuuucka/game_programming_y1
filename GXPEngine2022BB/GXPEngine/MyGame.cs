@@ -6,18 +6,16 @@ using System.Collections.Generic;
 public class MyGame : Game
 {
 	string startLevel = 
-		"map1.tmx";
-		//"menu.tmx";
+		//"map1.tmx";
+		"menu.tmx";
 	string nextLevel = "end.tmx";
 	EasyDraw healthUI;
 	EasyDraw pointUI;
-
+	SoundChannel soundTrackGame;
 
 	public MyGame() : base(768,768, false, false, 768, 768,true)		// Create a window that's 768x768, NOT fullscreen, with pixel art enabled
 	{
-
 		LoadLevel(startLevel);
-		
 	}
 
 	private void CreateUI()
@@ -76,8 +74,27 @@ public class MyGame : Game
         }
     }
 
+	private void PlayMusic(string music)
+	{
+		soundTrackGame = new Sound(music, true, true).Play();
+		soundTrackGame.Volume = 0.5f;
+	}
+
+	public void StopMusic()
+    {
+		soundTrackGame.Stop();
+	}
+
 	public void LoadLevel(string filename)
     {
+		if (filename.Contains("map"))
+		{
+			PlayMusic("background.wav");
+		}
+		else
+		{
+			PlayMusic("menu_background.wav");
+		}
 		DestroyAll();
 		LateAddChild(new LevelManager(filename));
 		CreateUI();
