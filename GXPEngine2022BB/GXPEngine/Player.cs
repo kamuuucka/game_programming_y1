@@ -15,6 +15,7 @@ internal class Player : AnimationSprite
     private bool logAttached = false;
     public bool isDead = false;
     PlayerData playerData = new PlayerData();
+    Sound jump = new Sound("jump.wav");
         
     public Player(TiledObject obj=null) : base("forg_sprites_big.png", 2, 2)
     {
@@ -34,37 +35,38 @@ internal class Player : AnimationSprite
 
     private void CharacterMovement()
     {
-
         if (Input.GetKeyUp(Key.A))
         {
             previousX = x;
             Move(-speed, 0);
             SetCycle(1, 1);
+            jump.Play().Volume = 0.2f;
         }
         else if (Input.GetKeyUp(Key.D))
         {
             previousX = x;
             Move(speed, 0);
             SetCycle(0, 1);
+            jump.Play().Volume = 0.2f;
         }
         else if (Input.GetKeyUp(Key.W))
         {
             previousY = y;
             Move(0, -speed);
             SetCycle(2, 1);
+            jump.Play().Volume = 0.2f;
         }
         else if (Input.GetKeyUp(Key.S))
         {
             previousY = y;
             Move(0, speed);
-            SetCycle(3, 1);  
+            SetCycle(3, 1);
+            jump.Play().Volume = 0.2f;
         }
-
         if (x<0 || x > 768)
         {
             x = previousX;
         }
-
         Animate();
         CheckCollisions();
         logAttached = false;
@@ -77,12 +79,14 @@ internal class Player : AnimationSprite
         {
             if (collisions[i] is Enemy)
             {
+                new Sound("death.wav").Play();
                 TakeDamage();
                 isDead = true;
                 SpawnPlayer();
             }
             if (collisions[i] is Pickup)
             {
+                new Sound("point.wav").Play();
                 ((Pickup)collisions[i]).Grab();
                 playerData.Points++;
             }
@@ -98,6 +102,7 @@ internal class Player : AnimationSprite
             }
             if (collisions[i] is Death && !logAttached)
             {
+                new Sound("death_water.wav").Play();
                 TakeDamage();
                 isDead = true;
                 SpawnPlayer();
@@ -133,6 +138,7 @@ internal class Player : AnimationSprite
     {
         if (playerData.Lives == 0)
         {
+            new Sound("lose.wav").Play();
             Console.WriteLine("dead");
             return true;
         }
