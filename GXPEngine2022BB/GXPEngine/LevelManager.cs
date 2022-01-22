@@ -67,6 +67,8 @@ internal class LevelManager : GameObject
                 y = -576;
             }
             AddChild(new Wall(player, 64 * mapHeight));
+
+            
         }
         
     }
@@ -103,6 +105,12 @@ internal class LevelManager : GameObject
             player.isDead = false;
         }
         Scrolling();
+
+        if (player.IsDead())
+        {
+            Console.WriteLine("END");
+            ((MyGame)game).LoadLevel("end.tmx");
+        }
     }
 }
 

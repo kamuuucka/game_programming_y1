@@ -129,11 +129,20 @@ internal class Player : AnimationSprite
         playerData.Lives -= damage;
     }
 
+    public bool IsDead()
+    {
+        if (playerData.Lives == 0)
+        {
+            Console.WriteLine("dead");
+            return true;
+        }
+        return false;
+    }
+
     void Update()
     {
         if (!started)
         {
-            
             started = true;
         }
         CharacterMovement();

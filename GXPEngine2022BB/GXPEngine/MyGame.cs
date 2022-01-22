@@ -5,11 +5,10 @@ using System.Collections.Generic;
 
 public class MyGame : Game
 {
-	//string startLevel = "map_demo1.tmx";
 	string startLevel = 
 		"map1.tmx";
 		//"menu.tmx";
-	string nextLevel = null;
+	string nextLevel = "end.tmx";
 	EasyDraw healthUI;
 	EasyDraw pointUI;
 
@@ -18,7 +17,6 @@ public class MyGame : Game
 	{
 
 		LoadLevel(startLevel);
-	
 		
 	}
 
