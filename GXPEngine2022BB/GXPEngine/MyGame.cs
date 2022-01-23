@@ -8,7 +8,7 @@ public class MyGame : Game
 	string startLevel = 
 		//"map1.tmx";
 		"menu.tmx";
-	string nextLevel = "end.tmx";
+	//string nextLevel = "end.tmx";
 	EasyDraw healthUI;
 	EasyDraw pointUI;
 	SoundChannel soundTrackGame;
@@ -86,6 +86,9 @@ public class MyGame : Game
 
 	public void LoadLevel(string filename)
     {
+		DestroyAll();
+		LateAddChild(new LevelManager(filename));
+		CreateUI();
 		if (filename.Contains("map"))
 		{
 			PlayMusic("background.wav");
@@ -93,9 +96,8 @@ public class MyGame : Game
 		else
 		{
 			PlayMusic("menu_background.wav");
+			healthUI.LateDestroy();
+			pointUI.SetXY(width / 2 - 50, height / 2 - 56);
 		}
-		DestroyAll();
-		LateAddChild(new LevelManager(filename));
-		CreateUI();
-    }
+	}
 }

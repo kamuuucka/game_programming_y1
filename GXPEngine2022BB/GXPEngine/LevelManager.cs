@@ -12,7 +12,6 @@ internal class LevelManager : GameObject
     Player player;
     TiledLoader loader;
     private float mapHeight = 0f;
-    private bool isPlaying = false;
     
 
     public LevelManager(string filename)
