@@ -10,8 +10,7 @@ internal class Log : Sprite
     private bool goesLeft;
     private float startX = 0f;
     private float speed = 2f;
-    //TODO: Grapics for log!!!
-    public Log(TiledObject obj = null) : base("checkers.png")
+    public Log(TiledObject obj = null) : base("log.png")
     {
         goesLeft = obj.GetBoolProperty("goesLeft", true);
         LogsSpawn();

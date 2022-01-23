@@ -12,7 +12,7 @@ internal class Enemy : Sprite
     public float startX = 0;
     private float speed = 2f;
     private bool goesLeft = false;
-    public Enemy(TiledObject obj = null) : base("truck.png")
+    public Enemy(TiledObject obj = null) : base("car.png")
     {
         goesLeft = obj.GetBoolProperty("goesLeft", true);
         EnemiesSpawn();

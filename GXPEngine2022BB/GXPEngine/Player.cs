@@ -14,6 +14,8 @@ internal class Player : AnimationSprite
     private bool started;
     private bool logAttached = false;
     public bool isDead = false;
+    private bool isFinished = false;
+    private bool outOfScreen = false;
     PlayerData playerData = new PlayerData();
     Sound jump = new Sound("jump.wav");
         
@@ -66,6 +68,11 @@ internal class Player : AnimationSprite
         if (x<0 || x > 768)
         {
             x = previousX;
+            outOfScreen = true;
+        }
+        else
+        {
+            outOfScreen=false;
         }
         Animate();
         CheckCollisions();
@@ -80,9 +87,7 @@ internal class Player : AnimationSprite
             if (collisions[i] is Enemy)
             {
                 new Sound("death.wav").Play();
-                TakeDamage();
-                isDead = true;
-                SpawnPlayer();
+                PlayerDeath();
             }
             if (collisions[i] is Pickup)
             {
@@ -103,12 +108,14 @@ internal class Player : AnimationSprite
             if (collisions[i] is Death && !logAttached)
             {
                 new Sound("death_water.wav").Play();
-                TakeDamage();
-                isDead = true;
-                SpawnPlayer();
+                PlayerDeath();
             }
             if (collisions[i] is SaveSpot)
             {
+                if (((SaveSpot)collisions[i]).GetIsEnd())
+                {
+                    isFinished = true;
+                }
                 //Calculating of frogs position, so it still moves every 64 pixels
                 x = (int)(x / 64 + 1) * 64 - 32;
             }
@@ -134,12 +141,38 @@ internal class Player : AnimationSprite
         playerData.Lives -= damage;
     }
 
-    public bool IsDead()
+    private void PlayerDeath()
+    {
+        TakeDamage();
+        isDead = true;
+        SpawnPlayer();
+    }
+
+    private void LogDeath()
+    {
+        if (logAttached && outOfScreen)
+        {
+            PlayerDeath();
+        }
+    }
+
+    public bool GameOver()
     {
         if (playerData.Lives == 0)
         {
             new Sound("lose.wav").Play();
             Console.WriteLine("dead");
+            return true;
+        }
+        return false;
+    }
+
+    public bool GameWin()
+    {
+        if (isFinished)
+        {
+            new Sound("win_1.wav").Play();
+            Console.WriteLine("Won");
             return true;
         }
         return false;
@@ -152,6 +185,7 @@ internal class Player : AnimationSprite
             started = true;
         }
         CharacterMovement();
+        LogDeath();
         ((MyGame)game).ShowHealth(playerData.Lives);
         ((MyGame)game).ShowPoints(playerData.Points);
     }

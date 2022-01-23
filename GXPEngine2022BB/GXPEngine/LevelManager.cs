@@ -108,7 +108,13 @@ internal class LevelManager : GameObject
         }
         Scrolling();
 
-        if (player.IsDead())
+        if (player.GameOver())
+        {
+            ((MyGame)game).StopMusic();
+            ((MyGame)game).LoadLevel("end.tmx");
+        }
+
+        if (player.GameWin())
         {
             ((MyGame)game).StopMusic();
             ((MyGame)game).LoadLevel("end.tmx");

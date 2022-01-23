@@ -33,7 +33,6 @@ public class MyGame : Game
     {
 		if (healthUI != null)
         {
-			//Console.WriteLine(" HEALTH: " + health);
 			healthUI.Text("Health: " + health, true);
 		}
 
