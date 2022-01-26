@@ -9,7 +9,7 @@ internal class Log : Sprite
 {
     private bool goesLeft;
     private float startX = 0f;
-    private float speed = 2f;
+    private float speed = 2.2f;
     public Log(TiledObject obj = null) : base("log.png")
     {
         goesLeft = obj.GetBoolProperty("goesLeft", true);

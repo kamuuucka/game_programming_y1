@@ -22,7 +22,7 @@ internal class Enemy : Sprite
     {
         if (goesLeft)
         {
-            startX = 777f;
+            startX = 905f;
         }
         else
         {

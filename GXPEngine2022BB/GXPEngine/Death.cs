@@ -9,7 +9,7 @@ using TiledMapParser;
 
 internal class Death : Sprite
 {
-    public Death (TiledObject obj = null) : base("wall.png")
+    public Death (TiledObject obj = null) : base("wall1.png")
     {
         collider.isTrigger = true;
         Console.WriteLine("Water is deadly");

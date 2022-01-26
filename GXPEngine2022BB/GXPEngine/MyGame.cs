@@ -5,9 +5,10 @@ using System.Collections.Generic;
 
 public class MyGame : Game
 {
-	string startLevel = 
+	string startLevel =
 		//"map1.tmx";
 		"menu.tmx";
+		//"map_final.tmx";
 	//string nextLevel = "end.tmx";
 	EasyDraw healthUI;
 	EasyDraw pointUI;

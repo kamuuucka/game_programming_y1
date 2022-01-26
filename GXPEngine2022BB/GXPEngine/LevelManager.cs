@@ -21,6 +21,7 @@ internal class LevelManager : GameObject
         
         loader.OnObjectCreated += ObjectCreateCallback;
         mapHeight = loader.map.Height;
+        Console.WriteLine(mapHeight);
         CreateLevel();
 
         //Console.WriteLine("LEVEL " + filename + " loaded.");
@@ -63,10 +64,7 @@ internal class LevelManager : GameObject
         //Setting camera on player
         if (player != null)
         {
-            if (player.y + y > game.height - 128)
-            {
-                y = -576;
-            }
+            SetStartCamera();
             AddChild(new Wall(player, 64 * mapHeight));
 
             
@@ -90,7 +88,7 @@ internal class LevelManager : GameObject
     {
         if (player.y + y > game.height - 128)
         {
-            y = -576;
+            y = -mapHeight * 64;
         }
     }
 

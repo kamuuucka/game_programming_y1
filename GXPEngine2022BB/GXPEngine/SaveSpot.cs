@@ -9,7 +9,7 @@ using TiledMapParser;
 internal class SaveSpot : Sprite
 {
     private bool isEnd = false;
-    public SaveSpot(TiledObject obj = null) : base("wall.png")
+    public SaveSpot(TiledObject obj = null) : base("wall1.png")
     {
         collider.isTrigger = true;
         Console.WriteLine("SaveSpot");

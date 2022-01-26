@@ -14,7 +14,7 @@ internal class Button : GameObject
     public Button(Sprite visualButton, TiledObject obj)
     {
         this.visualButton = visualButton;
-        filename = obj.GetStringProperty("load", "map1");
+        filename = obj.GetStringProperty("load", "map_final");
         isFinished = obj.GetBoolProperty("isFinished", false);
     }
 
