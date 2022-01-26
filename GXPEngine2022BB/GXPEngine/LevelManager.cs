@@ -1,34 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TiledMapParser;
 using GXPEngine;
 
-
+/// <summary>
+/// Manages going from one level to another
+/// </summary>
 internal class LevelManager : GameObject
 {
-    Player player;
-    TiledLoader loader;
+    private Player player;
+    private TiledLoader loader;
     private float mapHeight = 0f;
     
 
     public LevelManager(string filename)
     {
-        //Console.WriteLine("Creating new level " + filename);
-        loader = new TiledLoader(filename);
-        
-        loader.OnObjectCreated += ObjectCreateCallback;
-        mapHeight = loader.map.Height;
-        Console.WriteLine(mapHeight);
-        CreateLevel();
-
-        //Console.WriteLine("LEVEL " + filename + " loaded.");
+        if (filename != null)
+        {
+            loader = new TiledLoader(filename);
+            loader.OnObjectCreated += ObjectCreateCallback;
+            mapHeight = loader.map.Height;
+            StartLevel();
+        }
     }
 
-    
+    void Update()
+    {
+        if (player == null) return;
+        ResetPlayerAndCamera();
+        Scrolling();
+        GameStatus();
+    }
 
+    //------------------------------------------------------------------------------------------------------------------------
+    //														Button Creation
+    //------------------------------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// Creates button sprite from tiled
+    /// </summary>
+    /// <param name="sprite"></param>
+    /// <param name="obj"></param>
     private void ObjectCreateCallback(Sprite sprite, TiledObject obj)
     {
         if (sprite != null)
@@ -37,20 +48,25 @@ internal class LevelManager : GameObject
         }
         if (obj.Type == "Button")
         {
-            Console.WriteLine("Adding button");
             AddChild(new Button(sprite,obj));   
         }
     }
 
-    private void CreateLevel(bool includeImageLayers = true)
+    //------------------------------------------------------------------------------------------------------------------------
+    //														Game Level
+    //------------------------------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// Starts the level by creating all the layers
+    /// </summary>
+    /// <param name="includeImageLayers"></param>
+    private void StartLevel(bool includeImageLayers = true)
     {
-        //Console.WriteLine("Spawning level elements");
-        
         loader.addColliders = false;
         loader.rootObject = game;
         loader.LoadImageLayers();
 
-        loader.rootObject = this; //child of level
+        loader.rootObject = this;
         loader.LoadTileLayers(0);
         loader.addColliders = true;
         loader.LoadTileLayers(1);
@@ -61,50 +77,20 @@ internal class LevelManager : GameObject
 
         player = FindObjectOfType<Player>();
 
-        //Setting camera on player
+        //Creating start camera and the blocking wall
         if (player != null)
         {
             SetStartCamera();
             AddChild(new Wall(player, 64 * mapHeight));
-
-            
         }
         
     }
 
-    private void Scrolling()
+    /// <summary>
+    /// Checks if game is won or lost and plays music according to it
+    /// </summary>
+    private void GameStatus()
     {
-        int boundary = 588;            
-
-        if (player.y + y < boundary)
-        {
-            y = boundary - player.y + 20;
-        }
-            
-    }
-
-
-    public void SetStartCamera()
-    {
-        if (player.y + y > game.height - 128)
-        {
-            y = -mapHeight * 64;
-        }
-    }
-
-    void Update()
-    {
-        if (player == null) return;
-        if (player.isDead)
-        {
-            SetStartCamera();
-            
-            player.x = player.startX;               //resetting start positions to allow player move on few blocks without camre movement
-            player.y = player.startY;
-            player.isDead = false;
-        }
-        Scrolling();
-
         if (player.GameOver())
         {
             ((MyGame)game).StopMusic();
@@ -117,5 +103,40 @@ internal class LevelManager : GameObject
             ((MyGame)game).LoadLevel("end.tmx");
         }
     }
+
+    //------------------------------------------------------------------------------------------------------------------------
+    //														Camera settings
+    //------------------------------------------------------------------------------------------------------------------------
+
+    private void Scrolling()
+    {
+        int boundary = 588;            
+
+        if (player.y + y < boundary)
+        {
+            y = boundary - player.y + 20;
+        }
+            
+    }
+
+    public void SetStartCamera()
+    {
+        if (player.y + y > game.height - 128)
+        {
+            y = -mapHeight * 64;
+        }
+    }
+
+    private void ResetPlayerAndCamera()
+    {
+        if (player.isDead)
+        {
+            SetStartCamera();
+            player.x = player.startX;
+            player.y = player.startY;
+            player.isDead = false;
+        }
+    }
+
 }
 

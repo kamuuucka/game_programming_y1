@@ -2,7 +2,9 @@
 using TiledMapParser;
 using GXPEngine;
 
-
+/// <summary>
+/// PLayer. Contains everything important for the player.
+/// </summary>
 internal class Player : AnimationSprite
 {
     private int damage = 1;
@@ -11,13 +13,11 @@ internal class Player : AnimationSprite
     public float startX = 0;
     public float startY = 0;
     private float speed = 64f;
-    private bool started;
     private bool logAttached = false;
     public bool isDead = false;
     private bool isFinished = false;
-    private bool outOfScreen = false;
-    PlayerData playerData = new PlayerData();
-    Sound jump = new Sound("jump.wav");
+    private PlayerData playerData = new PlayerData();
+    private Sound jump = new Sound("jump.wav");
         
     public Player(TiledObject obj=null) : base("forg_sprites_big.png", 2, 2)
     {
@@ -25,16 +25,18 @@ internal class Player : AnimationSprite
         if (obj != null)
         {
             startX = obj.X + 20;
-            previousX = startX;
             startY = obj.Y + 20;
+            previousX = startX;
             previousY = startY;
-            
             Console.WriteLine("Player spawned: " + startX + ", " + startY);
         }
-        
     }
 
-
+    /// <summary>
+    /// Player can move with the help of WASD keys.
+    /// Handles the animation, side blocking and collision.
+    /// Detaches player from the logs
+    /// </summary>
     private void CharacterMovement()
     {
         if (Input.GetKeyUp(Key.A))
@@ -65,20 +67,37 @@ internal class Player : AnimationSprite
             SetCycle(3, 1);
             jump.Play().Volume = 0.2f;
         }
-        if (x<0 || x > 768)
-        {
-            x = previousX;
-            outOfScreen = true;
-        }
-        else
-        {
-            outOfScreen=false;
-        }
+
         Animate();
         CheckCollisions();
+        OutOfScreen();
         logAttached = false;
     }
 
+    /// <summary>
+    /// Prevents player from jumping out of screen on the sides.
+    /// Checks if player got out of the screen with help of the log.
+    /// </summary>
+    /// <returns>
+    /// 1 if player is out of the screen
+    /// 0 if player is still on the screen
+    /// </returns>
+    private bool OutOfScreen()
+    {
+        if (x < 0 || x > 768)
+        {
+            x = previousX;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Checks player's collisions with different objects
+    /// </summary>
     private void CheckCollisions()
     {
         GameObject[] collisions = GetCollisions();
@@ -102,7 +121,6 @@ internal class Player : AnimationSprite
             if (collisions[i] is Log)
             {
                 Move(((Log)collisions[i]).getSpeed(), 0);
-                Console.WriteLine("LOG");
                 logAttached = true;
             }
             if (collisions[i] is Death && !logAttached)
@@ -116,12 +134,11 @@ internal class Player : AnimationSprite
                 {
                     isFinished = true;
                 }
-                //Calculating of frogs position, so it still moves every 64 pixels
+                //Calculating the frog's position, so it still moves every 64 pixels
                 x = (int)(x / 64 + 1) * 64 - 32;
             }
         }
     }
-
 
     private void SpawnPlayer()
     {
@@ -141,6 +158,10 @@ internal class Player : AnimationSprite
         playerData.Lives -= damage;
     }
 
+    /// <summary>
+    /// Removes one live from the player and respawns him.
+    /// Marks player as dead one. It is used in Wall.Update()
+    /// </summary>
     private void PlayerDeath()
     {
         TakeDamage();
@@ -150,7 +171,7 @@ internal class Player : AnimationSprite
 
     private void LogDeath()
     {
-        if (logAttached && outOfScreen)
+        if (logAttached && OutOfScreen())
         {
             PlayerDeath();
         }
@@ -161,7 +182,6 @@ internal class Player : AnimationSprite
         if (playerData.Lives == 0)
         {
             new Sound("lose.wav").Play();
-            Console.WriteLine("dead");
             return true;
         }
         return false;
@@ -172,7 +192,6 @@ internal class Player : AnimationSprite
         if (isFinished)
         {
             new Sound("win_1.wav").Play();
-            Console.WriteLine("Won");
             return true;
         }
         return false;
@@ -180,10 +199,6 @@ internal class Player : AnimationSprite
 
     void Update()
     {
-        if (!started)
-        {
-            started = true;
-        }
         CharacterMovement();
         LogDeath();
         ((MyGame)game).ShowHealth(playerData.Lives);

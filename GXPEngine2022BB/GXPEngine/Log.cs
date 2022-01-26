@@ -1,10 +1,9 @@
-﻿using System;
-using GXPEngine;
+﻿using GXPEngine;
 using TiledMapParser;
 
-//Logs that can move player from left to right
-
-
+/// <summary>
+/// Log. Allow player to stick to it and move from side to side
+/// </summary>
 internal class Log : Sprite
 {
     private bool goesLeft;
@@ -12,11 +11,16 @@ internal class Log : Sprite
     private float speed = 2.2f;
     public Log(TiledObject obj = null) : base("log.png")
     {
-        goesLeft = obj.GetBoolProperty("goesLeft", true);
-        LogsSpawn();
+        if (obj != null)
+        {
+            goesLeft = obj.GetBoolProperty("goesLeft", true);
+            LogsSpawn();
+        }
     }
 
-    //Spawn logs on the screen. Depends on the boolean declaring if the log goes left or right
+    /// <summary>
+    /// Spawn logs on the screen. Depends on the boolean declaring if the log goes left or right
+    /// </summary>
     private void LogsSpawn()
     {
         if (goesLeft)
@@ -29,7 +33,9 @@ internal class Log : Sprite
         }
     }
 
-    //Responsible for moving the logs
+    /// <summary>
+    /// Moves the logs and respawns them when they leave the screen
+    /// </summary>
     private void LogMovement()
     {
         if (goesLeft)
@@ -51,7 +57,13 @@ internal class Log : Sprite
         }
     }
 
-    //Getter used to put the log's speed into the player
+    /// <summary>
+    /// Get's the log speed to put it on the player
+    /// </summary>
+    /// <returns>
+    /// speed if log goes right
+    /// -speed if log goes left
+    /// </returns>
     public float getSpeed()
     {
         if (goesLeft)

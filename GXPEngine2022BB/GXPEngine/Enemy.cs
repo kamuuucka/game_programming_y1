@@ -1,24 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GXPEngine;
 using TiledMapParser;
 
-
+/// <summary>
+/// Enemy. Contains everything that needed to have an enemy
+/// </summary>
 internal class Enemy : Sprite
 {
-    public float startX = 0;
+    private float startX = 0;
     private float speed = 2f;
     private bool goesLeft = false;
     public Enemy(TiledObject obj = null) : base("car.png")
     {
         goesLeft = obj.GetBoolProperty("goesLeft", true);
-        EnemiesSpawn();
+        EnemySpawn();
     }
 
-    private void EnemiesSpawn()
+    /// <summary>
+    /// Sets start X for enemy depending on which way it goes
+    /// </summary>
+    private void EnemySpawn()
     {
         if (goesLeft)
         {
@@ -29,10 +30,11 @@ internal class Enemy : Sprite
             startX = -128f;
             Mirror(true,false);
         }
-        
-        Console.WriteLine("Enemy spawned");
     }
 
+    /// <summary>
+    /// Moves the enemy and respawns it when it leaves the screen
+    /// </summary>
     public void EnemyMovement()
     {
         if (goesLeft)
@@ -51,7 +53,6 @@ internal class Enemy : Sprite
                 x = startX;
             }
         }
-        
     }
 
     void Update()

@@ -1,7 +1,8 @@
-﻿using System;
-using GXPEngine;
+﻿using GXPEngine;
 
-//Wall that is following the player, so he can't go back too much and escape from the screen
+/// <summary>
+/// Wall blocking the player. Makes sure that player can't go back and leave the game screen
+/// </summary>
 
 internal class Wall : Sprite
 { 
@@ -16,24 +17,25 @@ internal class Wall : Sprite
         collider.isTrigger = true;
     }
 
-    //Wall is following the player with each step
+    /// <summary>
+    /// Wall stays always at the bottom of the screen.
+    /// Allows player to move down few lines down the screen before blocking him.
+    /// </summary>
     private void FollowPlayer()
     {
         if (Input.GetKeyUp(Key.W))
         {
-            //If walls Y is higher than players Y + 180 it will move higher. Otherwise it will stay at the bottom of the scene.
-            //This stops the wall from going right after the player and allows him to move back on the screen.
-            if (y > playerToFollow.y + 180)  //+ 116 if you want to make the wall higher and visible
+            if (y > playerToFollow.y + 180)
             {
                 Move(0, -64f);
             }
         }
     }
-
-    //Makes sure, that wall respawns on the bottom of the screen
+    /// <summary>
+    /// Makes sure, that the wall respawns at the bottom of the screen
+    /// </summary>
     public void WallRespawn()
     {
-        //SetXY(0, mapHeight - 64); //This allows to make the wall visible and one block higher
         SetXY(0, mapHeight);
     }
 

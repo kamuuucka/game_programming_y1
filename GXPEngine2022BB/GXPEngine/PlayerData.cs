@@ -1,8 +1,10 @@
 ﻿using System;
 
+/// <summary>
+/// Player's data. Collects information about players lives and points.
+/// </summary>
 internal class PlayerData
 {
-
     private const int START_LIVES = 5;
     private const int START_POINTS = 0;
     private int lives = 0;
@@ -16,15 +18,11 @@ internal class PlayerData
         }
         set
         {
-            int oldLives = lives;
             lives = value;
             if (lives < 0)
             {
                 lives = 0;
-                Console.WriteLine("Lives can't be negative. Was {0} new value {1}, ", oldLives, value);
             }
-            Console.WriteLine("Player lives" + lives);
-
         }
     }
 
@@ -38,7 +36,6 @@ internal class PlayerData
         {
             points = value;
         }
-
     }
 
     public PlayerData()
@@ -46,10 +43,12 @@ internal class PlayerData
         Reset();
     }
 
+    /// <summary>
+    /// Resets player's data to the state at the beginning of the game
+    /// </summary>
     private void Reset()
     {
         lives = START_LIVES;
         points = START_POINTS;
-        Console.WriteLine("Resetting player data. Lives = {0}, Points = {1}", lives, points);
     }
 }

@@ -1,8 +1,9 @@
-﻿using System;
-using GXPEngine;
+﻿using GXPEngine;
 using TiledMapParser;
 
-//Button used in main menu
+/// <summary>
+/// Creates button used on menu and end screens
+/// </summary>
 
 internal class Button : GameObject
 {
@@ -10,7 +11,6 @@ internal class Button : GameObject
     private string filename;
     private bool isFinished;
 
-    //Button takes it's properties (like sprite and level to load) from tiles
     public Button(Sprite visualButton, TiledObject obj)
     {
         this.visualButton = visualButton;
@@ -18,7 +18,13 @@ internal class Button : GameObject
         isFinished = obj.GetBoolProperty("isFinished", false);
     }
 
-    //Checks if mouse is over the button
+    /// <summary>
+    /// Checks if mouse is hovering above the button
+    /// </summary>
+    /// <returns>
+    /// 1 if it is
+    /// 0 if it is not
+    /// </returns>
     private bool CheckHovering()
     {
         if (visualButton.HitTestPoint(Input.mouseX, Input.mouseY))
@@ -28,7 +34,11 @@ internal class Button : GameObject
         else return false;
     }
 
-    //If mouse is over the button, it changes color to mark that it's selected. After left click, the button starts the level.
+    /// <summary>
+    /// If mouse is hovering above the button it changes color.
+    /// After click button starts the level.
+    /// If button is marked as the one finishing game it destroys the game object and closes the application.
+    /// </summary>
     private void SelectButton()
     {
         if (CheckHovering())
