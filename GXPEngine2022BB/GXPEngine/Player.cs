@@ -120,7 +120,7 @@ internal class Player : AnimationSprite
             }
             if (collisions[i] is MovingLog)
             {
-                Move(((Log)collisions[i]).getSpeed(), 0);
+                Move(((MovingLog)collisions[i]).getSpeed(), 0);
                 logAttached = true;
             }
             if (collisions[i] is Death && !logAttached)

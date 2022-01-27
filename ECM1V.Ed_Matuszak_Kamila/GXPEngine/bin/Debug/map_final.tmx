@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="12" height="50" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="178">
+ <tileset firstgid="1" name="tiles" tilewidth="64" tileheight="64" tilecount="4" columns="2">
+  <image source="tileset.png" width="128" height="128"/>
+ </tileset>
+ <layer id="1" name="background" width="12" height="50">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,
+4,4,4,4,4,4,4,4,4,4,4,4,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,
+3,3,3,3,3,3,3,3,3,3,3,3,
+3,3,3,3,3,3,3,3,3,3,3,3,
+3,3,3,3,3,3,3,3,3,3,3,3,
+3,3,3,3,3,3,3,3,3,3,3,3,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,
+2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,
+1,1,1,2,1,1,1,1,2,1,1,1,
+2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,
+1,1,1,1,1,1,1,1,1,1,1,1,
+2,2,2,2,2,2,2,2,2,2,2,2,
+3,3,3,3,3,3,3,3,3,3,3,3,
+2,2,2,2,2,2,2,2,2,2,2,2,
+1,1,1,1,1,1,1,1,1,1,1,1,
+3,3,3,3,3,3,3,3,3,3,3,3,
+2,2,2,2,2,2,2,2,2,2,2,2,
+3,3,3,3,3,3,3,3,3,3,3,3,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,
+2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,
+2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,
+3,3,3,3,3,3,3,3,3,3,3,3,
+1,1,1,1,1,1,1,1,1,1,1,1,
+3,3,3,3,3,3,3,3,3,3,3,3,
+1,1,1,1,1,1,1,1,1,1,1,1,
+3,3,3,3,3,3,3,3,3,3,3,3,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup id="4" name="pickups">
+  <object id="49" name="Coin" type="Pickup" x="522.485" y="2762.92" width="42" height="42"/>
+  <object id="50" name="Coin" type="Pickup" x="138.152" y="2570.92" width="42" height="42"/>
+  <object id="51" name="Coin" type="Pickup" x="521.485" y="2376.92" width="42" height="42"/>
+  <object id="52" name="Coin" type="Pickup" x="201.121" y="1930.92" width="42" height="42"/>
+  <object id="53" name="Coin" type="Pickup" x="585.485" y="1482.92" width="42" height="42"/>
+  <object id="54" name="Coin" type="Pickup" x="199.485" y="1483.92" width="42" height="42"/>
+  <object id="55" name="Coin" type="Pickup" x="392.485" y="841.917" width="42" height="42"/>
+  <object id="56" name="Coin" type="Pickup" x="72.4848" y="844.917" width="42" height="42"/>
+  <object id="57" name="Coin" type="Pickup" x="650.485" y="841.917" width="42" height="42"/>
+  <object id="58" name="Coin" type="Pickup" x="325.985" y="202.417" width="42" height="42"/>
+  <object id="59" name="Coin" type="Pickup" x="520.818" y="459.917" width="42" height="42"/>
+  <object id="60" name="Coin" type="Pickup" x="263.485" y="651.917" width="42" height="42"/>
+  <object id="61" name="Coin" type="Pickup" x="329.485" y="1163.92" width="42" height="42"/>
+ </objectgroup>
+ <objectgroup id="2" name="enemies">
+  <object id="2" name="Water" type="Death" x="2" y="2136" width="765" height="195.333"/>
+  <object id="3" name="Car" type="MovingEnemy" x="774.333" y="2817.33" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="4" name="Car" type="MovingEnemy" x="966.333" y="2817.33" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="6" name="Car" type="MovingEnemy" x="1542.33" y="2817.33" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="7" name="Car" type="MovingEnemy" x="1350.33" y="2817.33" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="8" name="Car" type="MovingEnemy" x="-889" y="2689" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="9" name="Car" type="MovingEnemy" x="-697" y="2689" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="10" name="Car" type="MovingEnemy" x="-121" y="2689" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="11" name="Car" type="MovingEnemy" x="-313" y="2689" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="12" name="Car" type="MovingEnemy" x="777" y="2564" width="110" height="56"/>
+  <object id="13" name="Car" type="MovingEnemy" x="969" y="2564" width="110" height="56"/>
+  <object id="14" name="Car" type="MovingEnemy" x="1545" y="2564" width="110" height="56"/>
+  <object id="15" name="Car" type="MovingEnemy" x="1353" y="2564" width="110" height="56"/>
+  <object id="94" name="Water" type="Death" x="9" y="1756" width="754" height="140"/>
+  <object id="95" name="Water" type="Death" x="2" y="1416" width="763" height="46"/>
+  <object id="96" name="Water" type="Death" x="-1" y="1232" width="770" height="34"/>
+  <object id="97" name="Water" type="Death" x="1" y="1097" width="764" height="42"/>
+  <object id="104" name="FinishLine" type="SaveSpot" x="-2" y="66" width="772" height="56">
+   <properties>
+    <property name="isEnd" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="105" type="SaveSpot" x="1" y="657" width="766" height="33"/>
+  <object id="106" type="SaveSpot" x="3" y="840" width="188" height="45"/>
+  <object id="107" type="SaveSpot" x="258" y="845" width="251" height="39"/>
+  <object id="108" type="SaveSpot" x="577" y="844" width="189" height="36"/>
+  <object id="109" type="SaveSpot" x="2" y="1037" width="765" height="41"/>
+  <object id="110" type="SaveSpot" x="-3" y="1169" width="773" height="31"/>
+  <object id="111" type="SaveSpot" x="0" y="1360" width="768" height="34"/>
+  <object id="112" type="SaveSpot" x="4" y="1682" width="762" height="33"/>
+  <object id="113" type="SaveSpot" x="-1" y="2067" width="767" height="26"/>
+  <object id="124" name="Car" type="MovingEnemy" x="-128" y="1474" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="125" name="Car" type="MovingEnemy" x="-505" y="1474" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="126" name="Car" type="MovingEnemy" x="-889" y="1474" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="127" name="Car" type="MovingEnemy" x="1538.83" y="1352" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="128" name="Car" type="MovingEnemy" x="1161.83" y="1352" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="129" name="Car" type="MovingEnemy" x="777.833" y="1352" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="134" name="Car" type="MovingEnemy" x="-969.667" y="1153.33" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="135" name="Car" type="MovingEnemy" x="-693.667" y="1156" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="136" name="Car" type="MovingEnemy" x="-117.667" y="1156" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="137" name="Car" type="MovingEnemy" x="-421.667" y="1154.67" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="142" name="water" type="Death" x="4.00017" y="708" width="758.667" height="110.667"/>
+  <object id="143" name="water" type="Death" x="1.3335" y="904" width="765.333" height="108"/>
+  <object id="144" name="water" type="Death" x="204" y="846.666" width="38.6667" height="38.6667"/>
+  <object id="145" name="water" type="Death" x="521.333" y="841.333" width="40" height="40"/>
+  <object id="146" name="Car" type="MovingEnemy" x="777" y="520" width="110" height="56"/>
+  <object id="148" name="Car" type="MovingEnemy" x="1545" y="520" width="110" height="56"/>
+  <object id="149" name="Car" type="MovingEnemy" x="1235.67" y="520" width="110" height="56"/>
+  <object id="150" name="Car" type="MovingEnemy" x="931.667" y="389.333" width="110" height="56"/>
+  <object id="152" name="Car" type="MovingEnemy" x="1611.67" y="393.333" width="110" height="56"/>
+  <object id="154" name="Car" type="MovingEnemy" x="-953.668" y="454" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="156" name="Car" type="MovingEnemy" x="-185.668" y="454" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="157" name="Car" type="MovingEnemy" x="-494.998" y="454" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="158" name="Car" type="MovingEnemy" x="-951.001" y="326" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="159" name="Car" type="MovingEnemy" x="-710.998" y="326" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="160" name="Car" type="MovingEnemy" x="-118.998" y="327.333" width="110" height="56">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="174" type="SaveSpot" x="-1.16667" y="1296.5" width="773" height="31"/>
+  <object id="175" type="SaveSpot" x="1.5" y="1487.17" width="773" height="31"/>
+  <object id="176" type="SaveSpot" x="-1.16667" y="1936.5" width="773" height="31"/>
+  <object id="177" type="SaveSpot" x="1.5" y="2387.17" width="773" height="31"/>
+ </objectgroup>
+ <objectgroup id="3" name="logs">
+  <object id="78" name="Log" type="MovingLog" x="775.334" y="2314" width="110" height="40"/>
+  <object id="79" name="Log" type="MovingLog" x="1351.33" y="2314" width="110" height="40"/>
+  <object id="80" name="Log" type="MovingLog" x="1159.33" y="2314" width="110" height="40"/>
+  <object id="81" name="Log" type="MovingLog" x="967.334" y="2314" width="110" height="40"/>
+  <object id="82" name="Log" type="MovingLog" x="775.334" y="2188.67" width="110" height="40"/>
+  <object id="83" name="Log" type="MovingLog" x="1351.33" y="2188.67" width="110" height="40"/>
+  <object id="84" name="Log" type="MovingLog" x="1159.33" y="2188.67" width="110" height="40"/>
+  <object id="85" name="Log" type="MovingLog" x="967.334" y="2188.67" width="110" height="40"/>
+  <object id="86" name="Log" type="MovingLog" x="-695.333" y="2251.33" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="87" name="Log" type="MovingLog" x="-119.333" y="2251.33" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="88" name="Log" type="MovingLog" x="-311.333" y="2251.33" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="89" name="Log" type="MovingLog" x="-503.333" y="2251.33" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="90" name="Log" type="MovingLog" x="-693.999" y="2126" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="91" name="Log" type="MovingLog" x="-117.999" y="2126" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="92" name="Log" type="MovingLog" x="-309.999" y="2126" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="93" name="Log" type="MovingLog" x="-501.999" y="2126" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="114" name="Log" type="MovingLog" x="777" y="1870" width="110" height="40"/>
+  <object id="115" name="Log" type="MovingLog" x="1033" y="1870" width="110" height="40"/>
+  <object id="116" name="Log" type="MovingLog" x="1289" y="1870" width="110" height="40"/>
+  <object id="117" name="Log" type="MovingLog" x="777" y="1742" width="110" height="40"/>
+  <object id="118" name="Log" type="MovingLog" x="1033" y="1742" width="110" height="40"/>
+  <object id="119" name="Log" type="MovingLog" x="1289" y="1742" width="110" height="40"/>
+  <object id="120" name="Log" type="MovingLog" x="-128" y="1806" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="121" name="Log" type="MovingLog" x="-384" y="1806" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="122" name="Log" type="MovingLog" x="-640" y="1806" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="123" name="Log" type="MovingLog" x="1033" y="1422" width="110" height="40"/>
+  <object id="130" name="Log" type="MovingLog" x="811.667" y="1230" width="110" height="40"/>
+  <object id="131" name="Log" type="MovingLog" x="1223.67" y="1231.33" width="110" height="40"/>
+  <object id="132" name="Log" type="MovingLog" x="-573.667" y="1096" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="133" name="Log" type="MovingLog" x="-246.667" y="1094.67" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="162" name="Log" type="MovingLog" x="779.667" y="968" width="110" height="40"/>
+  <object id="163" name="Log" type="MovingLog" x="1035.67" y="968" width="110" height="40"/>
+  <object id="164" name="Log" type="MovingLog" x="1291.67" y="968" width="110" height="40"/>
+  <object id="165" name="Log" type="MovingLog" x="906.333" y="777.333" width="110" height="40"/>
+  <object id="166" name="Log" type="MovingLog" x="1167.67" y="774.667" width="110" height="40"/>
+  <object id="167" name="Log" type="MovingLog" x="1427.67" y="774.667" width="110" height="40"/>
+  <object id="168" name="Log" type="MovingLog" x="-755.001" y="908" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="169" name="Log" type="MovingLog" x="-498.998" y="908" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="170" name="Log" type="MovingLog" x="-242.998" y="908" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="171" name="Log" type="MovingLog" x="-628.335" y="721.333" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="172" name="Log" type="MovingLog" x="-372.332" y="721.333" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="173" name="Log" type="MovingLog" x="-116.332" y="721.333" width="110" height="40">
+   <properties>
+    <property name="goesLeft" type="bool" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="player">
+  <object id="1" name="Player" type="Player" x="268" y="3020" width="40" height="40"/>
+ </objectgroup>
+</map>

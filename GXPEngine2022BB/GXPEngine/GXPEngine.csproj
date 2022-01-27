@@ -57,10 +57,7 @@
   <ItemGroup>
     <Compile Include="Button.cs" />
     <Compile Include="Death.cs" />
-    <Compile Include="Enemy.cs" />
-    <Compile Include="Level.cs" />
     <Compile Include="LevelManager.cs" />
-    <Compile Include="Log.cs" />
     <Compile Include="MovingEnemy.cs" />
     <Compile Include="MovingLog.cs" />
     <Compile Include="MovingObject.cs" />

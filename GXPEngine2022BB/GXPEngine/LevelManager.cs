@@ -50,11 +50,6 @@ internal class LevelManager : GameObject
         {
             AddChild(new Button(sprite,obj));   
         }
-        if (obj.Type == "MovingEnemy")
-        {
-            Console.WriteLine("Creating enemy");
-            AddChild(new MovingEnemy(obj));
-        }
     }
 
     //------------------------------------------------------------------------------------------------------------------------
@@ -82,7 +77,7 @@ internal class LevelManager : GameObject
 
         player = FindObjectOfType<Player>();
 
-        //Creating start camera and the blocking wall
+        ///Creating start camera and the blocking wall
         if (player != null)
         {
             SetStartCamera();
@@ -119,7 +114,12 @@ internal class LevelManager : GameObject
         if (player.y + y < boundary)
         {
             y = boundary - player.y + 20;
-        }
+
+            if (player.y < 704)
+            {
+                y = 0;
+            }
+        } 
             
     }
 

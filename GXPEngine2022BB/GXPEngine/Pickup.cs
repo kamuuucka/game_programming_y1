@@ -17,11 +17,9 @@ internal class Pickup : AnimationSprite
         }
     }
 
-    //Let's player to pickup the object
     public void Grab()
     {
         LateDestroy();
-       // x -= 1000;
     }
 
     void Update()

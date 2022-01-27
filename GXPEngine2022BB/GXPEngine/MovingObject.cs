@@ -1,34 +1,44 @@
 ﻿using GXPEngine;
-using TiledMapParser;
+using System;
 
+/// <summary>
+/// Moving object. Class responsible for events connected with objects that are moving from side to side
+/// </summary>
 
 internal class MovingObject : Sprite
 {
-    //private bool goesLeft;
-    private bool isLeft = true;
+    private bool isLeft;
     private float startX;
     private float speed;
 
     public MovingObject(string sprite, float speed) : base(sprite)
     {
         this.speed = speed;
-        ObjectSpawn();
-        //goesLeft = obj.GetBoolProperty("goesLeft", true);
     }
 
-    protected bool goesLeft(bool goesLeft)
+    /// <summary>
+    /// Variable that checks if object is moving to the right or to the left
+    /// </summary>
+    public bool IsGoingLeft
     {
-        isLeft = goesLeft;
-        return isLeft;
+        get
+        {
+            return isLeft;
+        }
+        set
+        {
+            isLeft = value;
+        }
     }
 
-    private void ObjectSpawn()
+    protected void ObjectSpawn()
     {
         if (isLeft)
         {
             startX = 905f;
+            Console.WriteLine("Object left spawn X: " + startX);
         }
-        else
+        if (!isLeft)
         {
             startX = -128f;
             Mirror(true, false);
@@ -53,11 +63,6 @@ internal class MovingObject : Sprite
                 x = startX;
             }
         }
-    }
-
-    void Update()
-    {
-    
     }
 }
 

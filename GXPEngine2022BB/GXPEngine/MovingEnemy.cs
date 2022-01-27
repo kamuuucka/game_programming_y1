@@ -1,11 +1,20 @@
 ﻿using TiledMapParser;
-using System;
+
+/// <summary>
+/// Enemy object. Moves from side to side. 
+/// Inharitates from MovingObject.
+/// </summary>
 
 internal class MovingEnemy : MovingObject
 {
-    public MovingEnemy(TiledObject obj = null): base ("car.png", 2f)
+    private static float SPEED = 2f;
+
+    public MovingEnemy(TiledObject obj = null): base ("car.png", SPEED)
     {
-        goesLeft(obj.GetBoolProperty("goesLeft", true));
+        x = obj.X;
+        y = obj.Y;
+        IsGoingLeft = obj.GetBoolProperty("goesLeft", true);
+        ObjectSpawn();
     }
 
     void Update()

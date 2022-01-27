@@ -75,30 +75,6 @@ public class MyGame : Game
 		soundTrackGame.Stop();
 	}
 
-	/// <summary>
-	/// Chooses the music to play in the background and repositions healthUI and pointUI if it's a manu or end screen
-	/// </summary>
-	/// <param name="filename">
-	/// The name of the map has to contain the word map in itself
-	/// The name of other game screens can't contain the word map
-	/// </param>
-	private void ChooseMusic(string filename)
-    {
-		if (filename.Contains("map"))
-		{
-			PlayMusic("background.wav");
-		}
-		else
-		{
-			PlayMusic("menu_background.wav");
-			if(healthUI != null && pointUI != null)
-			{
-				healthUI.LateDestroy();
-				pointUI.SetXY(width / 2 - 50, height / 2 - 56);
-			}	
-		}
-	}
-
 	//------------------------------------------------------------------------------------------------------------------------
 	//														Level Management
 	//------------------------------------------------------------------------------------------------------------------------
@@ -116,8 +92,22 @@ public class MyGame : Game
 		{
 			DestroyAll();
 			LateAddChild(new LevelManager(filename));
-			ChooseMusic(filename);
 			CreateUI();
-		}
+
+            if (filename.Contains("map"))
+            {
+                PlayMusic("background.wav");
+            }
+            else
+            {
+                PlayMusic("menu_background.wav");
+                if (healthUI != null && pointUI != null)
+                {
+                    healthUI.LateDestroy();
+                    pointUI.SetXY(width / 2 - 70, height / 2 - 56);
+					pointUI.SetScaleXY(2, 2);
+                }
+            }
+        }
 	}
 }
