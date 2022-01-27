@@ -21,7 +21,6 @@ internal class Player : AnimationSprite
         
     public Player(TiledObject obj=null) : base("forg_sprites_big.png", 2, 2)
     {
-        SpawnPlayer();
         if (obj != null)
         {
             startX = obj.X + 20;
@@ -30,6 +29,7 @@ internal class Player : AnimationSprite
             previousY = startY;
             Console.WriteLine("Player spawned: " + startX + ", " + startY);
         }
+        SpawnPlayer();
     }
 
     /// <summary>
@@ -103,7 +103,7 @@ internal class Player : AnimationSprite
         GameObject[] collisions = GetCollisions();
         for (int i = 0; i < collisions.Length; i++)
         {
-            if (collisions[i] is Enemy)
+            if (collisions[i] is MovingEnemy)
             {
                 new Sound("death.wav").Play();
                 PlayerDeath();
@@ -118,7 +118,7 @@ internal class Player : AnimationSprite
             {
                 BlockPlayer();    
             }
-            if (collisions[i] is Log)
+            if (collisions[i] is MovingLog)
             {
                 Move(((Log)collisions[i]).getSpeed(), 0);
                 logAttached = true;

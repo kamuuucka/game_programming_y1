@@ -50,6 +50,11 @@ internal class LevelManager : GameObject
         {
             AddChild(new Button(sprite,obj));   
         }
+        if (obj.Type == "MovingEnemy")
+        {
+            Console.WriteLine("Creating enemy");
+            AddChild(new MovingEnemy(obj));
+        }
     }
 
     //------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +88,6 @@ internal class LevelManager : GameObject
             SetStartCamera();
             AddChild(new Wall(player, 64 * mapHeight));
         }
-        
     }
 
     /// <summary>
